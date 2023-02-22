@@ -5,11 +5,10 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using ChartDirector;
-
 using OptimizatonMethods.Models;
 
 
-namespace OptimizatonMethods
+namespace View.UserInterface.Researcher.Charts
 {
     /// <summary>
     ///     Логика взаимодействия для Chart2DWindow.xaml

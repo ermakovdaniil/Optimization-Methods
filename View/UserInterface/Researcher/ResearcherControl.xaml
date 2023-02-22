@@ -1,43 +1,55 @@
-﻿<hc:Window x:Class="OptimizatonMethods.MainWindow"
-           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-           xmlns:hc="https://handyorg.github.io/handycontrol"
-           xmlns:controls="clr-namespace:WpfMath.Controls;assembly=WpfMath"
-           xmlns:viewModels="clr-namespace:OptimizatonMethods.ViewModels"
-           xmlns:local="clr-namespace:OptimizatonMethods"
-           mc:Ignorable="d"
-           ShowTitle="False"
-           WindowStartupLocation="CenterOwner"
-           Title="Программный комплекс для решения задачи оптимизации химического реактора" Height="910" Width="1845" ResizeMode="CanMinimize" FontSize="16"
-           d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
-           SizeChanged="MainWindow_OnSizeChanged">
-    <Window.Resources>
-        <Style TargetType="ComboBoxItem">
-            <Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
-        </Style>
-    </Window.Resources>
+﻿<UserControl x:Class="View.UserInterface.Researcher.ResearcherControl"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:WpfMath.Controls;assembly=WpfMath"
+             xmlns:researcher="clr-namespace:View.UserInterface.Researcher"
+             xmlns:chart="clr-namespace:View.UserInterface.Researcher.Charts"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance researcher:ResearcherControlVM}"
+             SizeChanged="MainWindow_OnSizeChanged">
+    <UserControl.Resources>
+        <Menu x:Key="Menu" Background="{Binding NonClientAreaBackground,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" Grid.ColumnSpan="3">
+            <MenuItem Height="40" ToolTip="Открыть изображение" Command="{Binding ChangePathImageCommand}">
+                <MenuItem.Icon>
+                    <Image Height="20" Source="pack://application:,,,/resources/icons/open.png" />
+                </MenuItem.Icon>
+            </MenuItem>
 
-    <hc:Window.NonClientAreaContent>
-        <StackPanel Orientation="Horizontal">
-            <Menu>
-                <MenuItem Header="Посмотреть условие задания |" Command="{Binding WatchInfo}" FontSize="14" />
-            </Menu>
-            <TextBlock Text="Программный комплекс для решения задачи оптимизации химического реактора"
-                       Margin="7" FontSize="14" VerticalAlignment="Stretch" />
-        </StackPanel>
-        <!--<MenuItem Header="Файл">
-                    <MenuItem Header="2D график" Command="{Binding TwoDChartCommand}" />
-                    <MenuItem Header="3D график" Command="{Binding ThreeDChartCommand}" />
-                </MenuItem>
-            </Menu>
-            <TextBlock Text="{Binding Title,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}"
-                       Margin="5" FontSize="14" VerticalAlignment="Stretch" />
-        </StackPanel>
-        <TextBlock Text="{Binding Title,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}"
-                       Margin="5" FontSize="14" VerticalAlignment="Stretch" />-->
-    </hc:Window.NonClientAreaContent>
+            <MenuItem ToolTip="Сканировать изображениие" Command="{Binding ScanImage}">
+                <MenuItem.Icon>
+                    <Image Height="20" Source="pack://application:,,,/resources/icons/scanning.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem ToolTip="Экспортировать результат" Command="{Binding CreateFile}">
+                <MenuItem.Icon>
+                    <Image Height="20" Source="pack://application:,,,/resources/icons/save.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem ToolTip="Сменить учётную запись" Command="{Binding ChangeUser}">
+                <MenuItem.Icon>
+                    <Image Height="20" Source="pack://application:,,,/resources/icons/user.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem ToolTip="Справка о программе" Command="{Binding ShowInfo}">
+                <MenuItem.Icon>
+                    <Image Height="20" Source="pack://application:,,,/resources/icons/info.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem ToolTip="Выход" Command="{Binding Exit}">
+                <MenuItem.Icon>
+                    <Image Height="20" Source="pack://application:,,,/resources/icons/exit.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </Menu>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -134,7 +146,7 @@
                                       hc:InfoElement.TitlePlacement="Left" hc:InfoElement.TitleWidth="3*" ValueFormat="N0" Minimum="1"
                                       Style="{StaticResource NumericUpDownExtend}" Margin="10 3" 
                                       Value="{Binding Task.G}" />
-                            <Label HorizontalAlignment="Stretch" Content="[ кг/ч ]" Height="35" Margin="10 3" Grid.Row="3" Grid.Column="1"/> 
+                            <Label HorizontalAlignment="Stretch" Content="[ кг/ч ]" Height="35" Margin="10 3" Grid.Row="3" Grid.Column="1"/>
                             <hc:NumericUpDown Grid.Row="4" Grid.Column="0" hc:InfoElement.Title="Давление в реактор А" hc:InfoElement.TitleWidth="3*"
                                       hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N1" Increment="0.1" Minimum="0.1"
                                       Margin="10 3" Value="{Binding Task.A}" />
@@ -270,11 +282,11 @@
                 </Grid>
             </TabItem>
             <TabItem Header="2D график"  Background="{StaticResource Style2}">
-                <local:Chart2DWindow x:Name="Chart2D"/>
+                <chart:Chart2DWindow x:Name="Chart2D"/>
             </TabItem>
             <TabItem Header="3D график"  Background="{StaticResource Style2}">
-                <local:Chart3DWindow x:Name="Chart3D"/>
+                <chart:Chart3DWindow x:Name="Chart3D"/>
             </TabItem>
         </TabControl>
     </Grid>
-</hc:Window>
+</UserControl>

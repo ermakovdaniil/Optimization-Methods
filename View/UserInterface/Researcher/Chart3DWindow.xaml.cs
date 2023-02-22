@@ -9,7 +9,7 @@ using ChartDirector;
 using OptimizatonMethods.Models;
 
 
-namespace OptimizatonMethods
+namespace View.UserInterface.Researcher.Charts
 {
     /// <summary>
     ///     Логика взаимодействия для Chart3DWindow.xaml

@@ -31,10 +31,10 @@ namespace OptimizatonMethods
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ((MainWindowViewModel)DataContext).CalculateCommand.Execute(null);
-            Chart2D.drawChart(((MainWindowViewModel)DataContext).Task);
+            ((ResearcherControlVM)DataContext).CalculateCommand.Execute(null);
+            Chart2D.drawChart(((ResearcherControlVM)DataContext).Task);
             //Chart3D.createChart( ((MainWindowViewModel)DataContext).Task);
-            Chart3D.Task = ((MainWindowViewModel)DataContext).Task;
+            Chart3D.Task = ((ResearcherControlVM)DataContext).Task;
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)

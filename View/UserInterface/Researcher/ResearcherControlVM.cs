@@ -6,15 +6,13 @@ using System.Windows;
 
 using OptimizatonMethods.Models;
 
-using WPF_MVVM_Classes;
-
 using ViewModelBase = OptimizatonMethods.Services.ViewModelBase;
 
 
-namespace OptimizatonMethods.ViewModels
+namespace View.UserInterface.Researcher
 {
 
-    public class MainWindowViewModel : ViewModelBase
+    public class ResearcherControlVM : ViewModelBase
     {
 
         private ObservableCollection<Variant> _variants = new ObservableCollection<Variant>() { new Variant() { ID = 1, Name = "Вариант 1", IsEnabled = false },
@@ -54,7 +52,7 @@ namespace OptimizatonMethods.ViewModels
 
         #region Constructors
 
-        public MainWindowViewModel()
+        public ResearcherControlVM()
         {
             Task = new Task
             { Alpha = 1, Beta = 1, Mu = 1, G = 2, A = 1, N = 2, Price = 100, Precision = 0.01, T1min = -3, T1max = 3, T2min = -2, T2max = 6, TempCondition = 1 };

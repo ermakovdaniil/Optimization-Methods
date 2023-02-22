@@ -109,10 +109,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UserInterface\Researcher\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Page Update="UserInterface\Admin\Task\TaskEditControl.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
