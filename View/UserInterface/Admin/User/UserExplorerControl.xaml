@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="View.UserInterface.Admin.User.UserExplorerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:user="clr-namespace:View.UserInterface.Admin.User"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance user:UserExplorerControlVM}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <DataGrid ItemsSource="{Binding Users}"
+                      IsReadOnly="True"
+                      CanUserAddRows="False"
+                      SelectedItem="{Binding SelectedUser}"
+                      SelectionMode="Single"
+                      AutoGenerateColumns="False"
+                      Background="{StaticResource Style3}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID"
+                                        Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="Логин"
+                                        Binding="{Binding Login}" />
+                    <DataGridTextColumn Header="Пароль"
+                                        Binding="{Binding Password}" />
+                    <DataGridTextColumn Header="Имя пользователя"
+                                        Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Тип пользователя"
+                                        Binding="{Binding Type.Name}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Row="1" Background="{StaticResource Style2}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Width="100" Margin="5" hc:BorderElement.CornerRadius="10"
+                            Command="{Binding AddUser}" Background="{StaticResource Style3}"
+                            Content="{StaticResource AddButton}" />
+                    <Button Width="100" Margin="5" hc:BorderElement.CornerRadius="10"
+                            Command="{Binding EditUser}" Background="{StaticResource Style3}"
+                            Content="{StaticResource EditButton}" />
+                    <Button Width="100" Margin="5" hc:BorderElement.CornerRadius="10"
+                            Content="{StaticResource DeleteButton}"
+                            Command="{Binding DeleteUser}" Background="{StaticResource Style3}" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

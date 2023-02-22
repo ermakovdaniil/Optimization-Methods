@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="View.UserInterface.Admin.MainAdminControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             
+             xmlns:method="clr-namespace:View.UserInterface.Admin.Method"
+             xmlns:user="clr-namespace:View.UserInterface.Admin.User"
+             xmlns:admin="clr-namespace:View.UserInterface.Admin"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=admin:MainAdminControlVM}">
+    <UserControl.Resources>
+        <Menu x:Key="Menu" Height="40" Background="{Binding NonClientAreaBackground,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" Grid.ColumnSpan="3">
+            <MenuItem ToolTip="Сменить учётную запись" Command="{Binding ChangeUser}">
+                <MenuItem.Icon>
+                    <Image Height="20" Source="pack://application:,,,/resources/icons/user.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem ToolTip="Справка о программе" Command="{Binding ShowInfo}">
+                <MenuItem.Icon>
+                    <Image Height="20" Source="pack://application:,,,/resources/icons/info.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem ToolTip="Выход" Command="{Binding Exit}">
+                <MenuItem.Icon>
+                    <Image Height="20" Source="pack://application:,,,/resources/icons/exit.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </Menu>
+    </UserControl.Resources>
+    <Grid>
+        <TabControl x:Name="tabs"
+                    Visibility="{Binding TabControlVisibility, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource TabControlInLine}"
+                    Background="{StaticResource Style3}">
+            <TabItem Header="Редактирование методов оптимизации" Background="{StaticResource Style2}">
+                <!--<method:MethodExplorerControl />-->
+            </TabItem>
+            <TabItem Header="Редактирование оптимизационных задач" Background="{StaticResource Style2}">
+                <!--<gallery:GalleryControl />-->
+            </TabItem>
+            <TabItem Header="Редактирование пользователей" Background="{StaticResource Style2}">
+                <!--<user:UserExplorerControl />-->
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
