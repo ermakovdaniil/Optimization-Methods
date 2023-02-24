@@ -9,19 +9,29 @@ public partial class Task
 
     public string Name { get; set; } = null!;
 
-    public double? Alpha { get; set; }
+    public double Alpha { get; set; }
 
-    public double? Beta { get; set; }
+    public double Beta { get; set; }
 
-    public double? Nu { get; set; }
+    public double Mu { get; set; }
 
-    public double? MassConsumption { get; set; }
+    public double MassConsumption { get; set; }
 
-    public double? Pressure { get; set; }
+    public double Pressure { get; set; }
 
-    public long? Speed { get; set; }
+    public long Speed { get; set; }
 
-    public double? Price { get; set; }
+    public double Price { get; set; }
 
-    public double? Accuracy { get; set; }
+    public double Precision { get; set; }
+
+    public double T1min { get; set; }
+
+    public double T1max { get; set; }
+
+    public double T2min { get; set; }
+
+    public double T2max { get; set; }
+
+    public double TempCondition { get; set; }
 }

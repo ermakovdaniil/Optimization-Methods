@@ -13,10 +13,10 @@
             <RowDefinition />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Methods}" CanUserAddRows="False"
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Tasks}" CanUserAddRows="False"
                   IsReadOnly="True"
                   SelectionMode="Single"
-                  SelectedItem="{Binding SelectedMethod}" Background="{StaticResource Style3}">
+                  SelectedItem="{Binding SelectedTask}" Background="{StaticResource Style3}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
                 <DataGridTextColumn Header="Наименование" Binding="{Binding Name}" />
@@ -24,16 +24,16 @@
         </DataGrid>
         <Grid Row="1" Background="{StaticResource Style2}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="AddButton" Width="100" hc:BorderElement.CornerRadius="10"
+                <!--<Button x:Name="AddButton" Width="100" hc:BorderElement.CornerRadius="10"
                         Command="{Binding AddTask}" Content="{StaticResource AddButton}"
-                        Margin="0,0,10,0" Background="{StaticResource Style3}" />
+                        Margin="0,0,10,0" Background="{StaticResource Style3}" />-->
                 <Button x:Name="EditButton" Width="100" hc:BorderElement.CornerRadius="10"
                         Command="{Binding EditTask}"
                         Background="{StaticResource Style3}" Content="{StaticResource EditButton}" />
-                <Button x:Name="ExitButton" Width="100" hc:BorderElement.CornerRadius="10"
+                <!--<Button x:Name="ExitButton" Width="100" hc:BorderElement.CornerRadius="10"
                         Margin="10,0,0,0"
                         Command="{Binding DeleteTask}"
-                        Background="{StaticResource Style3}" Content="{StaticResource DeleteButton}" />
+                        Background="{StaticResource Style3}" Content="{StaticResource DeleteButton}" />-->
             </StackPanel>
         </Grid>
     </Grid>

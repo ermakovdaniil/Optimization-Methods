@@ -1,6 +1,5 @@
 ﻿using DataAccess.Data;
 using DataAccess.Models;
-using ImageAnalyzis;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,7 +19,6 @@ namespace View.UserInterface.Technologist;
 public class TechnologistControlVM : ViewModelBase
 {
     private object _data;
-    private readonly IImageAnalyzer _analyzer;
     private readonly IFileDialogService _dialogService;
     private readonly IMessageBoxService _messageBoxService;
     private readonly NavigationManager _navigationManager;
@@ -31,7 +29,6 @@ public class TechnologistControlVM : ViewModelBase
     public TechnologistControlVM(UserDBContext userContext,
                                  MethodDBContext methodsContext,
                                  NavigationManager navigationManager,
-                                 IImageAnalyzer analyzer,
                                  IFileDialogService dialogService,
                                  IMessageBoxService messageBoxService,
                                  IUserService userService)
@@ -40,7 +37,6 @@ public class TechnologistControlVM : ViewModelBase
         _methodsContext = methodsContext;
         _methodsContext.Methods.Load();
         _navigationManager = navigationManager;
-        _analyzer = analyzer;
         _dialogService = dialogService;
         _messageBoxService = messageBoxService;
         _userService = userService;
@@ -65,7 +61,6 @@ public class TechnologistControlVM : ViewModelBase
     private readonly MethodDBContext _methodsContext;
     public List<Method> Counterfeits => _methodsContext.Methods.ToList();
     public Method SelectedCounterfeit { get; set; }
-
 
     #endregion
 

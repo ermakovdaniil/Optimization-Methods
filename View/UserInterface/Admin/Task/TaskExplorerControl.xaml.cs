@@ -16,4 +16,3 @@ public partial class TaskExplorerControl : UserControl
         DataContext = _viewModel;
     }
 }
-

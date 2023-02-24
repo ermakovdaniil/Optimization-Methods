@@ -6,7 +6,7 @@ using System.Linq;
 using System.Windows;
 using View.UserInterface.Admin;
 using View.UserInterface.Admin.Abstract;
-using View.UserInterface.Technologist;
+using View.UserInterface.Researcher;
 using View.Utils;
 using View.Utils.Dialog;
 using View.Utils.MainWindowControlChanger;
@@ -79,7 +79,7 @@ public class LoginControlVM : ViewModelBase
 
                     if (user.Type.Name == "Исследователь")
                     {
-                        _navigationManager.Navigate<TechnologistControl>(new WindowParameters
+                        _navigationManager.Navigate<ResearcherControl>(new WindowParameters
                         {
                             WindowState = WindowState.Maximized,
                             Title = " | Панель исследователя | ",

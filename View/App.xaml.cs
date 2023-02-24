@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using DataAccess.Data;
-using ImageAnalyzis;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
@@ -9,7 +8,10 @@ using View.UserInterface.Admin;
 using View.UserInterface.Admin.Method;
 using View.UserInterface.Admin.Task;
 using View.UserInterface.Admin.User;
+using View.UserInterface.Researcher;
 using View.UserInterface.Technologist;
+using View.UserInterface.Researcher.Charts;
+using OptimizationMethods.Methods;
 using View.Utils;
 using View.Utils.Dialog;
 using View.Utils.FrameworkFactory;
@@ -53,17 +55,17 @@ public partial class App : Application
         builder.RegisterType<NavigationManager>().AsSelf().SingleInstance();
         builder.RegisterType<UserControlFactory>().AsSelf();
         builder.RegisterType<DialogService>().AsSelf();
-        //builder.RegisterType<ImageAnalyzis.ImageAnalyzer>().As<IImageAnalyzer>();
+        builder.RegisterType<Methods>().As<IMethod>();
         builder.RegisterType<FileDialogService>().As<IFileDialogService>();
         builder.RegisterType<HandyMessageBoxService>().As<IMessageBoxService>();
         builder.RegisterType<UserService>().As<IUserService>().SingleInstance();
 
         Container = builder.Build();
-
         VmLocator.Container = Container;
         VmLocator.Register<MainWindow, MainWindowVM>();
         VmLocator.Register<LoginControl, LoginControlVM>();
         VmLocator.Register<TechnologistControl, TechnologistControlVM>();
+        VmLocator.Register<ResearcherControl, ResearcherControlVM>();
         VmLocator.Register<MainAdminControl, MainAdminControlVM>();
         VmLocator.Register<UserEditControl, UserEditControlVM>();
         VmLocator.Register<UserExplorerControl, UserExplorerControlVM>();
@@ -71,6 +73,9 @@ public partial class App : Application
         VmLocator.Register<MethodExplorerControl, MethodExplorerControlVM>();
         VmLocator.Register<TaskEditControl, TaskEditControlVM>();
         VmLocator.Register<TaskExplorerControl, TaskExplorerControlVM>();
+        VmLocator.Register<Chart2DControl, Chart2DControlVM>();
+        VmLocator.Register<Chart3DControl, Chart3DControlVM>();
+
         var mainWindow = Container.Resolve<MainWindow>();
         mainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         mainWindow.Show();

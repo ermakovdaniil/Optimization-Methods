@@ -8,35 +8,34 @@
              xmlns:researcher="clr-namespace:View.UserInterface.Researcher"
              xmlns:chart="clr-namespace:View.UserInterface.Researcher.Charts"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance researcher:ResearcherControlVM}"
-             SizeChanged="MainWindow_OnSizeChanged">
+             d:DataContext="{d:DesignInstance researcher:ResearcherControlVM}">
     <UserControl.Resources>
         <Menu x:Key="Menu" Background="{Binding NonClientAreaBackground,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" Grid.ColumnSpan="3">
-            <MenuItem Height="40" ToolTip="Открыть изображение" Command="{Binding ChangePathImageCommand}">
-                <MenuItem.Icon>
-                    <Image Height="20" Source="pack://application:,,,/resources/icons/open.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-
-            <MenuItem ToolTip="Сканировать изображениие" Command="{Binding ScanImage}">
-                <MenuItem.Icon>
-                    <Image Height="20" Source="pack://application:,,,/resources/icons/scanning.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-
-            <MenuItem ToolTip="Экспортировать результат" Command="{Binding CreateFile}">
-                <MenuItem.Icon>
-                    <Image Height="20" Source="pack://application:,,,/resources/icons/save.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-
             <MenuItem ToolTip="Сменить учётную запись" Command="{Binding ChangeUser}">
                 <MenuItem.Icon>
                     <Image Height="20" Source="pack://application:,,,/resources/icons/user.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
+            <MenuItem ToolTip="Рассчитать целевую функцию" Command="{Binding CalculateCommand}">
+                <MenuItem.Icon>
+                    <Image Height="20" Source="pack://application:,,,/resources/icons/scanning.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <!--<MenuItem ToolTip="Экспортировать результат" Command="{Binding CreateFile}">
+                <MenuItem.Icon>
+                    <Image Height="20" Source="pack://application:,,,/resources/icons/save.png" />
+                </MenuItem.Icon>
+            </MenuItem>-->
+
             <MenuItem ToolTip="Справка о программе" Command="{Binding ShowInfo}">
+                <MenuItem.Icon>
+                    <Image Height="20" Source="pack://application:,,,/resources/icons/info.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem ToolTip="Показать условие" Command="{Binding WatchInfo}">
                 <MenuItem.Icon>
                     <Image Height="20" Source="pack://application:,,,/resources/icons/info.png" />
                 </MenuItem.Icon>
@@ -49,7 +48,7 @@
             </MenuItem>
         </Menu>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -63,55 +62,54 @@
                     <RowDefinition Height="85"/>
                     <RowDefinition Height="85"/>
                     <RowDefinition/>
-                    <RowDefinition Height="70" />
                 </Grid.RowDefinitions>
-                <hc:ElementGroup Grid.Row="0" Background="{StaticResource Style3}" Margin="0,0,9,0">
+                <hc:ElementGroup Grid.Row="0" Background="{StaticResource Style3}" Margin="9,0,9,0" Orientation="Vertical">
                     <Border Background="{StaticResource Style2}">
                         <hc:Divider Content="Уравнение" Margin="0 5" />
                     </Border>
                     <controls:FormulaControl Scale="25" Margin="10" Formula="R = P * \alpha * (G * \mu * ( (T_{2} - T_{1})^N + (\beta * A - T_{1})^N))"/>
                 </hc:ElementGroup>
 
-                <hc:ElementGroup Grid.Row="1" Background="{StaticResource Style3}" Margin="0,0,9,0">
+                <hc:ElementGroup Grid.Row="1" Background="{StaticResource Style3}" Margin="9,0,9,0" Orientation="Vertical">
                     <Border Background="{StaticResource Style2}">
                         <hc:Divider Content="Выбор метода" Margin="0 5" />
                     </Border>
-                    <ComboBox Margin="9"
+                    <hc:ComboBox Margin="9"
                                  Width="543"
                                  HorizontalAlignment="Left" 
                                  VerticalAlignment="Top"
-                                 ItemsSource="{Binding Path=CalcMethods}"             
-                                 SelectedItem="{Binding Path=SelectedCalcMethod}"        
+                                 ItemsSource="{Binding Path=Methods}"             
+                                 SelectedItem="{Binding Path=SelectedMethod}"        
                                  DisplayMemberPath="Name">
                         <ComboBox.ItemContainerStyle>
                             <Style TargetType="ComboBoxItem">
                                 <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
                             </Style>
                         </ComboBox.ItemContainerStyle>
-                    </ComboBox>
+                    </hc:ComboBox>
 
                 </hc:ElementGroup>
 
-                <hc:ElementGroup Grid.Row="2" Background="{StaticResource Style3}" Margin="0,0,9,0">
+                <hc:ElementGroup Grid.Row="2" Background="{StaticResource Style3}" Margin="9,0,9,0" Orientation="Vertical">
                     <Border Background="{StaticResource Style2}">
                         <hc:Divider Content="Выбор задания" Margin="0 5" />
                     </Border>
-                    <ComboBox Margin="9"
+                    <hc:ComboBox Margin="9"
                                  Width="543"
                                  HorizontalAlignment="Left" 
                                  VerticalAlignment="Top"
-                                 ItemsSource="{Binding Path=Variants}"             
-                                 SelectedItem="{Binding Path=SelectedVariant}"        
+                                 ItemsSource="{Binding Path=Tasks}"             
+                                 SelectedItem="{Binding Path=SelectedTask}"        
                                  DisplayMemberPath="Name">
                         <ComboBox.ItemContainerStyle>
                             <Style TargetType="ComboBoxItem">
                                 <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
                             </Style>
                         </ComboBox.ItemContainerStyle>
-                    </ComboBox>
+                    </hc:ComboBox>
                 </hc:ElementGroup>
 
-                <hc:ElementGroup Grid.Row="3" Background="{StaticResource Style3}" Margin="0,0,9,0">
+                <hc:ElementGroup Grid.Row="3" Background="{StaticResource Style3}" Margin="0,0,9,0" Orientation="Vertical">
                     <Expander ExpandDirection="Down" Header="Входные параметры" IsExpanded="True"
                                           HeaderTemplate="{StaticResource expanderHeader}"
                                           Background="{StaticResource Style1}">
@@ -145,15 +143,15 @@
                             <hc:NumericUpDown Grid.Row="3" Grid.Column="0" hc:InfoElement.Title="Расход реационной массы G"
                                       hc:InfoElement.TitlePlacement="Left" hc:InfoElement.TitleWidth="3*" ValueFormat="N0" Minimum="1"
                                       Style="{StaticResource NumericUpDownExtend}" Margin="10 3" 
-                                      Value="{Binding Task.G}" />
+                                      Value="{Binding Task.MassConsumption}" />
                             <Label HorizontalAlignment="Stretch" Content="[ кг/ч ]" Height="35" Margin="10 3" Grid.Row="3" Grid.Column="1"/>
                             <hc:NumericUpDown Grid.Row="4" Grid.Column="0" hc:InfoElement.Title="Давление в реактор А" hc:InfoElement.TitleWidth="3*"
                                       hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N1" Increment="0.1" Minimum="0.1"
-                                      Margin="10 3" Value="{Binding Task.A}" />
+                                      Margin="10 3" Value="{Binding Task.Pressure}" />
                             <Label HorizontalAlignment="Stretch" Content="[ кПа ]" Height="35" Margin="10 3" Grid.Row="4" Grid.Column="1"/>
                             <hc:NumericUpDown Grid.Row="5" Grid.Column="0" hc:InfoElement.Title="Скорость вращения мешалки N" hc:InfoElement.TitleWidth="3*"
                                       hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N0" Minimum="1"
-                                      Margin="10 3" Value="{Binding Task.N}" />
+                                      Margin="10 3" Value="{Binding Task.Speed}" />
                             <Label HorizontalAlignment="Stretch" Content="[ об/с ]" Height="35" Margin="10 3" Grid.Row="5" Grid.Column="1"/>
                             <hc:NumericUpDown Grid.Row="6" Grid.Column="0" hc:InfoElement.Title="Стоимость производства 1 кг" ValueFormat="N2" Increment="0.01" Minimum="0.01"
                                       hc:InfoElement.TitleWidth="3*"
@@ -208,14 +206,6 @@
                         </StackPanel>
                     </Expander>
                 </hc:ElementGroup>
-                <Grid Grid.Row="4">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Margin="5" Click="Button_Click" Background="{StaticResource Style3}" Width="150" Height="50" FontSize="16" Content="Рассчитать"/>
-                    <Button Grid.Column="1" Margin="5" Click="EditButton_Click" Background="{StaticResource Style3}" Width="150" Height="50" FontSize="16" Content="Редактирование"/>
-                </Grid>
             </Grid>
         </Expander>
         <TabControl x:Name="tabs" Visibility="{Binding TabControlVisibility, UpdateSourceTrigger=PropertyChanged}"
@@ -232,19 +222,18 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <Border Grid.Row="0" Grid.Column="0" Background="{StaticResource Style2}">
-                        <hc:Divider Content="Таблица значений"
-                                            Margin="0 5" />
+                        <hc:Divider Content="Таблица значений" Margin="0 5" />
                     </Border>
-                    <DataGrid Grid.Row="1" Grid.Column="0" ItemsSource="{Binding MathModel.Results.Points3D}" AutoGenerateColumns="True" CanUserAddRows="False" IsReadOnly="True"
-                      AutoGeneratingColumn="OnAutoGeneratingColumn" ColumnWidth="*" Background="{StaticResource Style3}">
+                    <DataGrid Grid.Row="1" Grid.Column="0" ItemsSource="{Binding MathModel.Results.Points3D}" 
+                              AutoGenerateColumns="True" AutoGeneratingColumn="OnAutoGeneratingColumn" 
+                              CanUserAddRows="False" IsReadOnly="True"
+                              ColumnWidth="*" Background="{StaticResource Style3}">
                     </DataGrid>
                     <Border Grid.Row="1" Grid.Column="1" Background="{StaticResource Style3}">
-                        <hc:Divider Background="{StaticResource DangerBrush}" Orientation="Vertical"
-                                            Margin="0, 0, 0, 5" />
+                        <hc:Divider Background="{StaticResource DangerBrush}" Orientation="Vertical" Margin="0, 0, 0, 5" />
                     </Border>
                     <Border Grid.Row="0" Grid.Column="2" Background="{StaticResource Style2}">
-                        <hc:Divider Content="Результат"
-                                            Margin="0 5" />
+                        <hc:Divider Content="Результат" Margin="0 5" />
                     </Border>
                     <Grid Grid.Row="1" Grid.Column="2" Background="{StaticResource Style3}">
                         <Grid.ColumnDefinitions>
@@ -261,31 +250,31 @@
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 0"
                                                 hc:InfoElement.TitleWidth="230"
-                                                Text="{Binding MathModel.Results.Price, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Text="{Binding CalculationResults.Price, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                                 HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Height="40" />
                         <Label HorizontalAlignment="Stretch" Content="[ у.е. ]" Height="40" Margin="10 3" Grid.Row="0" Grid.Column="1"/>
                         <hc:TextBox hc:InfoElement.Title="Температура в змеевике"
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                 hc:InfoElement.TitleWidth="230"
-                                                Text="{Binding MathModel.Results.T1, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Text="{Binding CalculationResults.T1, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                                 HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="0" Height="40" />
                         <Label HorizontalAlignment="Stretch" Content="[ °C ]" Height="40" Margin="10 3" Grid.Row="1" Grid.Column="1" />
                         <hc:TextBox hc:InfoElement.Title="Температура в рубашке"
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                 hc:InfoElement.TitleWidth="230"
-                                                Text="{Binding MathModel.Results.T2, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Text="{Binding CalculationResults.T2, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                                 HorizontalAlignment="Stretch" Grid.Row="2" Grid.Column="0" Height="40"/>
                         <Label HorizontalAlignment="Stretch" Content="[ °C ]" Height="40" Margin="10 3" Grid.Row="2" Grid.Column="1"/>
                     </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="2D график"  Background="{StaticResource Style2}">
-                <chart:Chart2DWindow x:Name="Chart2D"/>
+                <chart:Chart2DControl />
             </TabItem>
             <TabItem Header="3D график"  Background="{StaticResource Style2}">
-                <chart:Chart3DWindow x:Name="Chart3D"/>
+                <chart:Chart3DControl />
             </TabItem>
         </TabControl>
     </Grid>

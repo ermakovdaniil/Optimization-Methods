@@ -50,9 +50,6 @@ public partial class MethodDBContext : DbContext
             entity.HasIndex(e => e.Name, "IX_task_name").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Accuracy)
-                .HasColumnType("DOUBLE (10, 5)")
-                .HasColumnName("accuracy");
             entity.Property(e => e.Alpha)
                 .HasColumnType("DOUBLE (10, 2)")
                 .HasColumnName("alpha");
@@ -62,10 +59,13 @@ public partial class MethodDBContext : DbContext
             entity.Property(e => e.MassConsumption)
                 .HasColumnType("DOUBLE (10, 3)")
                 .HasColumnName("massConsumption");
-            entity.Property(e => e.Name).HasColumnName("name");
-            entity.Property(e => e.Nu)
+            entity.Property(e => e.Mu)
                 .HasColumnType("DOUBLE (10, 2)")
-                .HasColumnName("nu");
+                .HasColumnName("mu");
+            entity.Property(e => e.Name).HasColumnName("name");
+            entity.Property(e => e.Precision)
+                .HasColumnType("DOUBLE (10, 5)")
+                .HasColumnName("precision");
             entity.Property(e => e.Pressure)
                 .HasColumnType("DOUBLE (10, 2)")
                 .HasColumnName("pressure");
@@ -73,6 +73,21 @@ public partial class MethodDBContext : DbContext
                 .HasColumnType("DOUBLE (10, 2)")
                 .HasColumnName("price");
             entity.Property(e => e.Speed).HasColumnName("speed");
+            entity.Property(e => e.T1max)
+                .HasColumnType("DOUBLE (4, 1)")
+                .HasColumnName("t1max");
+            entity.Property(e => e.T1min)
+                .HasColumnType("DOUBLE (4, 1)")
+                .HasColumnName("t1min");
+            entity.Property(e => e.T2max)
+                .HasColumnType("DOUBLE (4, 1)")
+                .HasColumnName("t2max");
+            entity.Property(e => e.T2min)
+                .HasColumnType("DOUBLE (4, 1)")
+                .HasColumnName("t2min");
+            entity.Property(e => e.TempCondition)
+                .HasColumnType("DOUBLE (4, 1)")
+                .HasColumnName("tempCondition");
         });
 
         OnModelCreatingPartial(modelBuilder);
