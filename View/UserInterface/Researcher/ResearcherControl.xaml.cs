@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 
 using View.Utils;
@@ -23,5 +24,12 @@ public partial class ResearcherControl : UserControl
         {
             e.Column.Header = descriptor.DisplayName ?? descriptor.Name;
         }
+    }
+
+    private void CreateCharts(object sender, RoutedEventArgs e)
+    {
+        ((ResearcherControlVM)DataContext).CalculateCommand.Execute(null);
+        Chart2D.drawChart(((ResearcherControlVM)DataContext).Task);
+        Chart3D.Task = ((ResearcherControlVM)DataContext).Task;
     }
 }

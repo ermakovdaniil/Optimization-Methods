@@ -73,8 +73,8 @@ public partial class App : Application
         VmLocator.Register<MethodExplorerControl, MethodExplorerControlVM>();
         VmLocator.Register<TaskEditControl, TaskEditControlVM>();
         VmLocator.Register<TaskExplorerControl, TaskExplorerControlVM>();
-        VmLocator.Register<Chart2DControl, Chart2DControlVM>();
-        VmLocator.Register<Chart3DControl, Chart3DControlVM>();
+        //VmLocator.Register<Chart2DControl, Chart2DControlVM>();
+        //VmLocator.Register<Chart3DControl, Chart3DControlVM>();
 
         var mainWindow = Container.Resolve<MainWindow>();
         mainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;

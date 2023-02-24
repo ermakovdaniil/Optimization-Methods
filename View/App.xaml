@@ -27,13 +27,6 @@
                 <TextBlock Text="Добавить" />
             </StackPanel>
 
-            <StackPanel x:Shared="False" x:Key="OpenButton" Orientation="Horizontal">
-                <Image Source="pack://application:,,,/resources/icons/open.png"
-                       RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12"
-                       Margin="0,0,5,0" />
-                <TextBlock Text="Открыть изображение" />
-            </StackPanel>
-
             <StackPanel x:Shared="False" x:Key="EditButton" Orientation="Horizontal">
                 <Image Source="pack://application:,,,/resources/icons/editing.png"
                        RenderOptions.BitmapScalingMode="HighQuality" Width="9" Height="9" Margin="0,1,5,0" />
@@ -58,6 +51,7 @@
             <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />
             <SolidColorBrush x:Key="Style3" Color="#faf3f3" />
             <SolidColorBrush x:Key="Style4" Color="#a1adb5" />
+            
             <DataTemplate x:Key="expanderHeader">
                 <TextBlock Text="{Binding}"
                            FontSize="16"

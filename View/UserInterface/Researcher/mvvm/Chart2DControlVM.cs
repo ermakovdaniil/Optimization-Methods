@@ -41,6 +41,7 @@ namespace View.UserInterface.Researcher.Charts
         public BaseChart baseChart;
         public string imgMap;
         private XYChart chart;
+
         #endregion
 
 
@@ -62,12 +63,13 @@ namespace View.UserInterface.Researcher.Charts
                     {
                         dataX.Add(i);
                     }
+
                     for (double i = Task.T2min - step; i < Task.T2max + step; i += step)
                     {
                         dataY.Add(i);
                     }
-                    var dataZ = new List<double>();
 
+                    var dataZ = new List<double>();
                     for (int i = 0; i < dataX.Count; i++)
                     {
                         for (int j = 0; j < dataY.Count; j++)
@@ -75,6 +77,7 @@ namespace View.UserInterface.Researcher.Charts
                             dataZ.Add(0);
                         }
                     }
+
                     var k = 0;
 
                     for (int i = 0; i < dataX.Count; i++)

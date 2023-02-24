@@ -8,8 +8,11 @@
              xmlns:researcher="clr-namespace:View.UserInterface.Researcher"
              xmlns:chart="clr-namespace:View.UserInterface.Researcher.Charts"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance researcher:ResearcherControlVM}">
+             d:DataContext="{d:DesignInstance researcher:ResearcherControlVM}" FontSize="16">
     <UserControl.Resources>
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="IsEnabled" Value="{Binding Active}"/>
+        </Style>
         <Menu x:Key="Menu" Background="{Binding NonClientAreaBackground,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" Grid.ColumnSpan="3">
             <MenuItem ToolTip="Сменить учётную запись" Command="{Binding ChangeUser}">
                 <MenuItem.Icon>
@@ -54,8 +57,7 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Expander Grid.Column="0" ExpandDirection="Right" Background="{StaticResource Style1}"
-                  IsExpanded="True">
+        <Expander Grid.Column="0" ExpandDirection="Right" Background="{StaticResource Style1}" IsExpanded="True">
             <Grid Background="{StaticResource Style2}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="85"/>
@@ -63,52 +65,69 @@
                     <RowDefinition Height="85"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <hc:ElementGroup Grid.Row="0" Background="{StaticResource Style3}" Margin="9,0,9,0" Orientation="Vertical">
-                    <Border Background="{StaticResource Style2}">
-                        <hc:Divider Content="Уравнение" Margin="0 5" />
-                    </Border>
-                    <controls:FormulaControl Scale="25" Margin="10" Formula="R = P * \alpha * (G * \mu * ( (T_{2} - T_{1})^N + (\beta * A - T_{1})^N))"/>
+                <hc:ElementGroup Grid.Row="0" Background="{StaticResource Style2}" Margin="0,0,9,0" Orientation="Vertical">
+                    <Grid Background="{StaticResource Style3}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="54"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Background="{StaticResource Style2}">
+                            <hc:Divider Content="Уравнение" Margin="0 5" />
+                        </Border>
+                        <controls:FormulaControl Grid.Row="1" Scale="25" Margin="10" Formula="R = P * \alpha * (G * \mu * ( (T_{2} - T_{1})^N + (\beta * A - T_{1})^N))"/>
+                    </Grid>
                 </hc:ElementGroup>
 
-                <hc:ElementGroup Grid.Row="1" Background="{StaticResource Style3}" Margin="9,0,9,0" Orientation="Vertical">
-                    <Border Background="{StaticResource Style2}">
-                        <hc:Divider Content="Выбор метода" Margin="0 5" />
-                    </Border>
-                    <hc:ComboBox Margin="9"
+                <hc:ElementGroup Grid.Row="1" Background="{StaticResource Style2}" Margin="0,0,9,0" Orientation="Vertical">
+                    <Grid Background="{StaticResource Style3}" Height="87">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="48"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Background="{StaticResource Style2}">
+                            <hc:Divider Content="Выбор метода" Margin="0 5" />
+                        </Border>
+                        <ComboBox Grid.Row="1" Margin="9"
                                  Width="543"
                                  HorizontalAlignment="Left" 
                                  VerticalAlignment="Top"
                                  ItemsSource="{Binding Path=Methods}"             
                                  SelectedItem="{Binding Path=SelectedMethod}"        
                                  DisplayMemberPath="Name">
-                        <ComboBox.ItemContainerStyle>
-                            <Style TargetType="ComboBoxItem">
-                                <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
-                            </Style>
-                        </ComboBox.ItemContainerStyle>
-                    </hc:ComboBox>
-
+                            <ComboBox.ItemContainerStyle>
+                                <Style TargetType="ComboBoxItem">
+                                    <Setter Property="IsEnabled" Value="{Binding Methods.Active}" />
+                                </Style>
+                            </ComboBox.ItemContainerStyle>
+                        </ComboBox>
+                    </Grid>
                 </hc:ElementGroup>
 
-                <hc:ElementGroup Grid.Row="2" Background="{StaticResource Style3}" Margin="9,0,9,0" Orientation="Vertical">
-                    <Border Background="{StaticResource Style2}">
-                        <hc:Divider Content="Выбор задания" Margin="0 5" />
-                    </Border>
-                    <hc:ComboBox Margin="9"
+                <hc:ElementGroup Grid.Row="2" Background="{StaticResource Style2}" Margin="0,0,9,0" Orientation="Vertical">
+                    <Grid Background="{StaticResource Style3}" Height="88">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="48"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Background="{StaticResource Style2}">
+                            <hc:Divider Content="Выбор задания" Margin="0 5" />
+                        </Border>
+                        <ComboBox Grid.Row="1" Margin="9"
                                  Width="543"
                                  HorizontalAlignment="Left" 
                                  VerticalAlignment="Top"
                                  ItemsSource="{Binding Path=Tasks}"             
-                                 SelectedItem="{Binding Path=SelectedTask}"        
+                                 SelectedItem="{Binding Path=SelectedTask}"   
+                                 IsEnabled="{Binding Path=Active}"
                                  DisplayMemberPath="Name">
-                        <ComboBox.ItemContainerStyle>
-                            <Style TargetType="ComboBoxItem">
-                                <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
-                            </Style>
-                        </ComboBox.ItemContainerStyle>
-                    </hc:ComboBox>
+                            <ComboBox.ItemContainerStyle>
+                                <Style TargetType="ComboBoxItem">
+                                    <Setter Property="IsEnabled" Value="{Binding Methods.Active}" />
+                                </Style>
+                            </ComboBox.ItemContainerStyle>
+                        </ComboBox>
+                    </Grid>
                 </hc:ElementGroup>
-
                 <hc:ElementGroup Grid.Row="3" Background="{StaticResource Style3}" Margin="0,0,9,0" Orientation="Vertical">
                     <Expander ExpandDirection="Down" Header="Входные параметры" IsExpanded="True"
                                           HeaderTemplate="{StaticResource expanderHeader}"
@@ -184,7 +203,7 @@
                                 <hc:NumericUpDown hc:InfoElement.Title="" Grid.Column="2" Value="{Binding Task.T1max}" Margin="0,6" />
                                 <Label HorizontalAlignment="Stretch" Content="[ °C ]" Height="35" Grid.Column="3" Margin="6,0"/>
                                 <hc:NumericUpDown Grid.Row="1" Grid.Column="0" Value="{Binding Task.T2min}" Margin="0,6" />
-                                <Label Grid.Row="1" HorizontalAlignment="Stretch" Content="≤  Температура в рубашке ≤" Grid.Column="1" Background="{StaticResource Style3}" BorderBrush="{StaticResource Style3}"/>
+                                <Label Grid.Row="1" HorizontalAlignment="Stretch" Content="≤ Температура в рубашке ≤" Grid.Column="1" Background="{StaticResource Style3}" BorderBrush="{StaticResource Style3}" Height="35" />
                                 <hc:NumericUpDown Grid.Row="1" Grid.Column="2" Value="{Binding Task.T2max}" Margin="0,6" />
                                 <Label Grid.Row="1" HorizontalAlignment="Stretch" Content="[ °C ]" Height="35" Grid.Column="3" Margin="6,0"/>
                             </Grid>
@@ -192,7 +211,7 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="2.2*" />
-                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="2.2*" />
                                     <ColumnDefinition Width="2.2*" />
                                     <ColumnDefinition Width="1.2*" />
                                 </Grid.ColumnDefinitions>
@@ -200,7 +219,7 @@
                                           hc:InfoElement.TitlePlacement="Left"
                                           Style="{StaticResource NumericUpDownExtend}"
                                           HorizontalAlignment="Center"
-                                          Value="{Binding Task.TempCondition}" Width="413" />
+                                          Value="{Binding Task.TempCondition}" Width="426" Grid.Column="1"/>
                                 <Label Grid.Column="3" HorizontalAlignment="Stretch" Content="[ °C ]" Height="35" Margin="6,0"/>
                             </Grid>
                         </StackPanel>
@@ -271,10 +290,10 @@
                 </Grid>
             </TabItem>
             <TabItem Header="2D график"  Background="{StaticResource Style2}">
-                <chart:Chart2DControl />
+                <chart:Chart2DControl x:Name="Chart2D"/>
             </TabItem>
             <TabItem Header="3D график"  Background="{StaticResource Style2}">
-                <chart:Chart3DControl />
+                <chart:Chart3DControl x:Name="Chart3D"/>
             </TabItem>
         </TabControl>
     </Grid>

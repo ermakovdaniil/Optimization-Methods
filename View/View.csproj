@@ -8,6 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="UserInterface\Researcher\mvvm\**" />
+    <EmbeddedResource Remove="UserInterface\Researcher\mvvm\**" />
+    <None Remove="UserInterface\Researcher\mvvm\**" />
+    <Page Remove="UserInterface\Researcher\mvvm\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="UserInterface\Researcher\Chart2DControlVM.cs" />
+    <Compile Remove="UserInterface\Researcher\Chart3DControlVM.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="resources\fonts\Times_New_Roman.ttf" />
     <None Remove="resources\icons\3scanning.png" />
     <None Remove="resources\icons\cancel.png" />

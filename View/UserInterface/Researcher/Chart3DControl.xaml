@@ -1,19 +1,17 @@
 ﻿<UserControl x:Class="View.UserInterface.Researcher.Charts.Chart3DControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"        
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:chartDirector="clr-namespace:ChartDirector;assembly=ChartDirector.Net.Desktop.Controls"
-             xmlns:threeChart="clr-namespace:View.UserInterface.Researcher.Charts"
-             mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance threeChart:Chart3DControlVM}">
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:chartDirector="clr-namespace:ChartDirector;assembly=ChartDirector.Net.Desktop.Controls"
+        mc:Ignorable="d">
     <StackPanel>
         <DockPanel Background="#FFDDDDDD">
             <CheckBox x:Name="DrawFrameOnRotate" Content="Draw Frame On Rotate" Margin="8" IsChecked="True" />
         </DockPanel>
-        <!--<chartDirector:WPFChartViewer x:Name="WPFChartViewer1" Width="680" Height="580" Margin="8,8,0,0"
+        <chartDirector:WPFChartViewer x:Name="WPFChartViewer1" Width="680" Height="580" Margin="8,8,0,0"
                                       ViewPortChanged="WPFChartViewer1_ViewPortChanged"
                                       MouseMoveChart="WPFChartViewer1_MouseMoveChart"
-                                      MouseUp="WPFChartViewer1_MouseUpChart" />-->
+                                      MouseUp="WPFChartViewer1_MouseUpChart" />
     </StackPanel>
 </UserControl>

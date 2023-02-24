@@ -140,15 +140,7 @@ namespace View.UserInterface.Researcher
                             IsCalculated = true;
                             var methods = new Methods(Task);
                             results = methods.Calculate(SelectedMethod, Task);
-
-                            //MathModel = new MathModel(Task);
-                            //MathModel.Calculate();
-                            //OnPropertyChanged(nameof(MathModel));
-
-                            //((ResearcherControlVM)DataContext).CalculateCommand.Execute(null);
-                            //Chart2D.drawChart(((ResearcherControlVM)DataContext).Task);
-                            ////Chart3D.createChart( ((MainWindowViewModel)DataContext).Task);
-                            //Chart3D.Task = ((ResearcherControlVM)DataContext).Task;
+                            OnPropertyChanged(nameof(results));
                         }
                         catch (ArgumentException)
                         {

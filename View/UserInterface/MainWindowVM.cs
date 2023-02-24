@@ -53,8 +53,6 @@ public class MainWindowVM : ViewModelBase
     internal void SetNewContent(UserControl content)
     {
         ContentWindow = content;
-
-        //MenuControl.Content = content.TryFindResource("Menu") as Menu;
     }
 }
 
