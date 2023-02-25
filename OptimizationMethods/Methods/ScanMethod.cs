@@ -16,29 +16,29 @@ namespace OptimizationMethods.Methods
         private static readonly double _r = 2;
         private static double _step;
 
-        public static void Calculate(DataAccess.Models.Task task, out CalculationResults results)
+        public static void Calculate(Variant variant, out CalculationResults results)
         {
             var funcMin = double.MaxValue;
-            _step = Math.Pow(_k, _r) * task.Precision;
+            _step = Math.Pow(_k, _r) * variant.Precision;
             var points3D = new List<Point3D>();
             var p3D = new List<Point3D>();
             List<double> values;
             OptimizatonMethods.Models.Point newMin;
-            newMin = SearchMinOnGrid(task, out p3D, out values);
-            task.T1min = newMin.X - _step;
-            task.T2min = newMin.Y - _step;
-            task.T1max = newMin.X + _step;
-            task.T2max = newMin.Y + _step;
+            newMin = SearchMinOnGrid(variant, out p3D, out values);
+            variant.T1min = newMin.X - _step;
+            variant.T2min = newMin.Y - _step;
+            variant.T1max = newMin.X + _step;
+            variant.T2max = newMin.Y + _step;
             _step /= _k;
             points3D.AddRange(p3D);
 
             while (funcMin > values.Min())
             {
-                newMin = SearchMinOnGrid(task, out p3D, out values);
-                task.T1min = newMin.X - _step;
-                task.T2min = newMin.Y - _step;
-                task.T1max = newMin.X + _step;
-                task.T2max = newMin.Y + _step;
+                newMin = SearchMinOnGrid(variant, out p3D, out values);
+                variant.T1min = newMin.X - _step;
+                variant.T2min = newMin.Y - _step;
+                variant.T1max = newMin.X + _step;
+                variant.T2max = newMin.Y + _step;
                 _step /= _k;
                 funcMin = values.Min();
                 points3D.AddRange(p3D);
@@ -49,21 +49,21 @@ namespace OptimizationMethods.Methods
             results = new CalculationResults { Price = minPrice, T1 = t1, T2 = t2, Points3D = new ObservableCollection<Point3D>(points3D) };
         }
 
-        private static OptimizatonMethods.Models.Point SearchMinOnGrid(DataAccess.Models.Task task, out List<Point3D> points3D, out List<double> values)
+        private static OptimizatonMethods.Models.Point SearchMinOnGrid(Variant variant, out List<Point3D> points3D, out List<double> values)
         {
             points3D = new List<Point3D>();
-            var methods = new MathModel(task);
-            for (var t1 = task.T1min; t1 <= task.T1max; t1 += _step)
+            //var methods = new MathModel(variant);
+            for (var t1 = variant.T1min; t1 <= variant.T1max; t1 += _step)
             {
-                for (var t2 = task.T2min; t2 <= task.T2max; t2 += _step)
+                for (var t2 = variant.T2min; t2 <= variant.T2max; t2 += _step)
                 {
-                    if (!methods.Conditions(t1, t2))
+                    if (!variant.Conditions(t1, t2))
                     {
                         continue;
                     }
 
                     CalculationCount++;
-                    var value = methods.Function(t1, t2);
+                    var value = variant.Function(t1, t2);
 
                     if (value < 0)
                     {

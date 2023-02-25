@@ -121,11 +121,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="UserInterface\Admin\Task\TaskEditControl.xaml">
+    <Page Update="UserInterface\Admin\Variant\VariantEditControl.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UserInterface\Admin\Task\TaskExplorerControl.xaml">
+    <Page Update="UserInterface\Admin\Variant\VariantExplorerControl.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

@@ -19,8 +19,8 @@ namespace View.UserInterface.Researcher.Charts
     {
         #region Properties
 
-        private Task _task;
-        public DataAccess.Models.Task Task { get; set; }
+        private Variant _variant;
+        public Variant Variant { get; set; }
         private readonly List<Point3D> _dataList = new();
         private ContourLayer contourLayer;
         public BaseChart baseChart;
@@ -40,29 +40,29 @@ namespace View.UserInterface.Researcher.Charts
             InitializeComponent();
         }
 
-        public Chart2DControl(List<Point3D> dataList, Task task)
+        public Chart2DControl(List<Point3D> dataList, Variant variant)
         {
             _dataList = dataList;
-            _task = task;
+            _variant = variant;
             InitializeComponent();
         }
 
         #endregion
 
 
-        public void drawChart(Task task)
+        public void drawChart(Variant variant)
         {
             var dataX = new List<double>();
             var dataY = new List<double>();
-            var method = new MathModel(Task);
+            //var method = new MathModel(Variant);
             var step = 1;
 
-            for (double i = Task.T1min - step; i < Task.T1max + step; i += step)
+            for (double i = variant.T1min - step; i < variant.T1max + step; i += step)
             {
                 dataX.Add(i);
             }
 
-            for (double i = Task.T2min - step; i < Task.T2max + step; i += step)
+            for (double i = variant.T2min - step; i < variant.T2max + step; i += step)
             {
                 dataY.Add(i);
             }
@@ -82,7 +82,7 @@ namespace View.UserInterface.Researcher.Charts
             {
                 for (int j = 0; j < dataY.Count; j++)
                 {
-                    dataZ[j * dataX.Count + i] = method.Function(dataX[i], dataY[j]);
+                    dataZ[j * dataX.Count + i] = variant.Function(dataX[i], dataY[j]);
                 }
             }
 

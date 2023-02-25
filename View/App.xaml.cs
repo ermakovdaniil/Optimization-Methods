@@ -6,7 +6,7 @@ using System.Windows;
 using View.UserInterface;
 using View.UserInterface.Admin;
 using View.UserInterface.Admin.Method;
-using View.UserInterface.Admin.Task;
+using View.UserInterface.Admin.Variant;
 using View.UserInterface.Admin.User;
 using View.UserInterface.Researcher;
 using View.UserInterface.Technologist;
@@ -71,8 +71,8 @@ public partial class App : Application
         VmLocator.Register<UserExplorerControl, UserExplorerControlVM>();
         VmLocator.Register<MethodEditControl, MethodEditControlVM>();
         VmLocator.Register<MethodExplorerControl, MethodExplorerControlVM>();
-        VmLocator.Register<TaskEditControl, TaskEditControlVM>();
-        VmLocator.Register<TaskExplorerControl, TaskExplorerControlVM>();
+        VmLocator.Register<VariantEditControl, VariantEditControlVM>();
+        VmLocator.Register<VariantExplorerControl, VariantExplorerControlVM>();
         //VmLocator.Register<Chart2DControl, Chart2DControlVM>();
         //VmLocator.Register<Chart3DControl, Chart3DControlVM>();
 

@@ -37,8 +37,9 @@ namespace View.UserInterface.Researcher
                                    IMessageBoxService messageBoxService,
                                    IUserService userService)
         {
-            Task = new Task { Alpha = 1, Beta = 1, Mu = 1, MassConsumption = 2, Pressure = 1, Speed = 2, Price = 100, Precision = 0.01, T1min = -3, T1max = 3, T2min = -2, T2max = 6, TempCondition = 1 };
+            Variant = new Variant { Alpha = 1, Beta = 1, Mu = 1, MassConsumption = 2, Pressure = 1, Speed = 2, Price = 100, Precision = 0.01, T1min = -3, T1max = 3, T2min = -2, T2max = 6, TempCondition = 1 };
             IsCalculated = false;
+            _isCalculated = false;
             _userContext = userContext;
             _methodsContext = methodsContext;
             _methodsContext.Methods.Load();
@@ -59,9 +60,9 @@ namespace View.UserInterface.Researcher
         private readonly MethodDBContext _methodsContext;
         public List<Method> Methods => _methodsContext.Methods.ToList();
         public Method SelectedMethod { get; set; }
-        public List<Task> Tasks => _methodsContext.Tasks.ToList();
-        public Task SelectedTask { get; set; }
-        public Task Task { get; set; }
+        public List<Variant> Variants => _methodsContext.Variants.ToList();
+        public Variant SelectedVariant { get; set; }
+        public Variant Variant { get; set; }
 
         private bool _isCalculated;
         public bool IsCalculated
@@ -113,7 +114,7 @@ namespace View.UserInterface.Researcher
             }
         }
 
-        public CalculationResults results { get; set; }
+        public CalculationResults Results { get; set; }
 
         #endregion
 
@@ -132,18 +133,36 @@ namespace View.UserInterface.Researcher
                     {
                         _messageBoxService.ShowMessage("Не выбран метод оптимизации.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
+                    if (Variant.T1min >= Variant.T1max && Variant.T2min >= Variant.T2max)
+                    {
+                        _messageBoxService.ShowMessage("Минимальная температура не может быть больше максимальной.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                     else
                     {
                         try
                         {
                             IsCalculated = true;
-                            //_mathModel = new MathModel(Task);
-                            results = _mathModel.Calculate(SelectedMethod, Task);
-                            OnPropertyChanged(nameof(results));
+                            //_mathModel = new MathModel(Variant);
+                            CalculationResults result = new CalculationResults();
+                            switch (SelectedMethod.Id)
+                            {
+                                case 1:
+                                    ScanMethod.Calculate(Variant, out result);
+                                    break;
+                                case 2:
+                                    //BoxMethod.Calculate(variant, out results);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            Results = result;
+                            //results = _mathModel.Calculate(SelectedMethod, Variant);
+                            Variant a = Variant;
+                            OnPropertyChanged(nameof(Results));
                         }
                         catch (ArgumentException)
                         {
-                            _messageBoxService.ShowMessage("Данные в базе фальсификатов были удалены или повреждены.\nПеред запуском анализа устраните проблему.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                            _messageBoxService.ShowMessage(".", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                 });

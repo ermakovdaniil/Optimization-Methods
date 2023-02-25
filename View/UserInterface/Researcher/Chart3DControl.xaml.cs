@@ -19,17 +19,17 @@ namespace View.UserInterface.Researcher.Charts
     {
         #region Properties
 
-        private Task _task;
+        private Variant _variant;
 
-        public Task Task
+        public Variant Variant
         {
             get
             {
-                return _task;
+                return _variant;
             }
             set
             {
-                _task = value;
+                _variant = value;
                 createChart();
             }
         }
@@ -65,15 +65,15 @@ namespace View.UserInterface.Researcher.Charts
         {
             var dataX = new List<double>();
             var dataY = new List<double>();
-            var method = new MathModel(Task);
+            //var method = new MathModel(Variant);
             var step = 1;
 
-            for (double i = Task.T1min - step; i < Task.T1max + step; i += step)
+            for (double i = Variant.T1min - step; i < Variant.T1max + step; i += step)
             {
                 dataX.Add(i);
             }
 
-            for (double i = Task.T2min - step; i < Task.T2max + step; i += step)
+            for (double i = Variant.T2min - step; i < Variant.T2max + step; i += step)
             {
                 dataY.Add(i);
             }
@@ -93,7 +93,7 @@ namespace View.UserInterface.Researcher.Charts
             {
                 for (int j = 0; j < dataY.Count; j++)
                 {
-                    dataZ[j * dataX.Count + i] = method.Function(dataX[i], dataY[j]);
+                    dataZ[j * dataX.Count + i] = Variant.Function(dataX[i], dataY[j]);
                 }
             }
             chart = new SurfaceChart(1299, 865);

@@ -20,7 +20,7 @@
                 </MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem ToolTip="Рассчитать целевую функцию" Click="CreateCharts" Command="{Binding CalculateCommand}">
+            <MenuItem ToolTip="Рассчитать целевую функцию" Command="{Binding CalculateCommand}" Click="CreateCharts">
                 <MenuItem.Icon>
                     <Image Height="20" Source="pack://application:,,,/resources/icons/scanning.png" />
                 </MenuItem.Icon>
@@ -87,7 +87,7 @@
                         <Border Grid.Row="0" Background="{StaticResource Style2}">
                             <hc:Divider Content="Выбор метода" Margin="0 5" />
                         </Border>
-                        <ComboBox Grid.Row="1" Margin="9"
+                        <hc:ComboBox Grid.Row="1" Margin="9"
                                  Width="543"
                                  HorizontalAlignment="Left" 
                                  VerticalAlignment="Top"
@@ -99,7 +99,7 @@
                                     <Setter Property="IsEnabled" Value="{Binding Methods.Active}" />
                                 </Style>
                             </ComboBox.ItemContainerStyle>
-                        </ComboBox>
+                        </hc:ComboBox>
                     </Grid>
                 </hc:ElementGroup>
 
@@ -112,12 +112,13 @@
                         <Border Grid.Row="0" Background="{StaticResource Style2}">
                             <hc:Divider Content="Выбор задания" Margin="0 5" />
                         </Border>
-                        <ComboBox Grid.Row="1" Margin="9"
+                        <hc:ComboBox Grid.Row="1" Margin="9"
                                  Width="543"
                                  HorizontalAlignment="Left" 
                                  VerticalAlignment="Top"
-                                 ItemsSource="{Binding Path=Tasks}"             
-                                 SelectedItem="{Binding Path=SelectedTask}"   
+                                 ShowClearButton="True"
+                                 ItemsSource="{Binding Path=Variants}"             
+                                 SelectedItem="{Binding Path=Variant}"   
                                  IsEnabled="{Binding Path=Active}"
                                  DisplayMemberPath="Name">
                             <ComboBox.ItemContainerStyle>
@@ -125,7 +126,7 @@
                                     <Setter Property="IsEnabled" Value="{Binding Methods.Active}" />
                                 </Style>
                             </ComboBox.ItemContainerStyle>
-                        </ComboBox>
+                        </hc:ComboBox>
                     </Grid>
                 </hc:ElementGroup>
                 <hc:ElementGroup Grid.Row="3" Background="{StaticResource Style3}" Margin="0,0,9,0" Orientation="Vertical">
@@ -150,36 +151,36 @@
                             <hc:NumericUpDown Grid.Row="0" Grid.Column="0" hc:InfoElement.Title="Нормирующий множитель, α"
                                       hc:InfoElement.TitlePlacement="Left" hc:InfoElement.TitleWidth="3*" ValueFormat="N2"
                                       Style="{StaticResource NumericUpDownExtend}" Margin="10 3" Increment="0.01" Minimum="0.01"
-                                      Value="{Binding Task.Alpha}" />
+                                      Value="{Binding Variant.Alpha}" />
                             <hc:NumericUpDown Grid.Row="1" Grid.Column="0" hc:InfoElement.Title="Нормирующий множитель, β"
                                       hc:InfoElement.TitlePlacement="Left" hc:InfoElement.TitleWidth="3*" ValueFormat="N2"
                                       Style="{StaticResource NumericUpDownExtend}" Margin="10 3" Increment="0.01" Minimum="0.01"
-                                      Value="{Binding Task.Beta}" />
+                                      Value="{Binding Variant.Beta}" />
                             <hc:NumericUpDown Grid.Row="2" Grid.Column="0" hc:InfoElement.Title="Нормирующий множитель, μ"
                                       hc:InfoElement.TitlePlacement="Left" hc:InfoElement.TitleWidth="3*" ValueFormat="N2"
                                       Style="{StaticResource NumericUpDownExtend}" Margin="10 3" Increment="0.01" Minimum="0.01"
-                                      Value="{Binding Task.Mu}" />
+                                      Value="{Binding Variant.Mu}" />
                             <hc:NumericUpDown Grid.Row="3" Grid.Column="0" hc:InfoElement.Title="Расход реационной массы, G"
                                       hc:InfoElement.TitlePlacement="Left" hc:InfoElement.TitleWidth="3*" ValueFormat="N0" Minimum="1"
                                       Style="{StaticResource NumericUpDownExtend}" Margin="10 3" 
-                                      Value="{Binding Task.MassConsumption}" />
+                                      Value="{Binding Variant.MassConsumption}" />
                             <Label HorizontalAlignment="Stretch" Content="[ кг/ч ]" Height="35" Margin="10 3" Grid.Row="3" Grid.Column="1"/>
                             <hc:NumericUpDown Grid.Row="4" Grid.Column="0" hc:InfoElement.Title="Давление в реактор, А" hc:InfoElement.TitleWidth="3*"
                                       hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N1" Increment="0.1" Minimum="0.1"
-                                      Margin="10 3" Value="{Binding Task.Pressure}" />
+                                      Margin="10 3" Value="{Binding Variant.Pressure}" />
                             <Label HorizontalAlignment="Stretch" Content="[ кПа ]" Height="35" Margin="10 3" Grid.Row="4" Grid.Column="1"/>
                             <hc:NumericUpDown Grid.Row="5" Grid.Column="0" hc:InfoElement.Title="Скорость вращения мешалки, N" hc:InfoElement.TitleWidth="3*"
                                       hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N0" Minimum="1"
-                                      Margin="10 3" Value="{Binding Task.Speed}" />
+                                      Margin="10 3" Value="{Binding Variant.Speed}" />
                             <Label HorizontalAlignment="Stretch" Content="[ об/с ]" Height="35" Margin="10 3" Grid.Row="5" Grid.Column="1"/>
                             <hc:NumericUpDown Grid.Row="6" Grid.Column="0" hc:InfoElement.Title="Стоимость производства 1 кг, P" ValueFormat="N2" Increment="0.01" Minimum="0.01"
                                       hc:InfoElement.TitleWidth="3*"
                                       hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}"
-                                      Margin="10 3" Value="{Binding Task.Price}" />
+                                      Margin="10 3" Value="{Binding Variant.Price}" />
                             <Label HorizontalAlignment="Stretch" Content="[ у.е. ]" Height="35" Margin="10 3" Grid.Row="6" Grid.Column="1"/>
                             <hc:NumericUpDown Grid.Row="7" Grid.Column="0" hc:InfoElement.Title="Точность решения" hc:InfoElement.TitleWidth="3*"
                                       hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" Increment="0.01" Minimum="0.01"
-                                      Margin="10 3" Value="{Binding Task.Precision}" />
+                                      Margin="10 3" Value="{Binding Variant.Precision}" />
                             <Label HorizontalAlignment="Stretch" Content="[ °C ]" Height="35" Margin="10 3" Grid.Row="7" Grid.Column="1"/>
                         </Grid>
                     </Expander>
@@ -198,13 +199,13 @@
                                     <RowDefinition />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <hc:NumericUpDown Grid.Column="0" Value="{Binding Task.T1min}" Margin="0,6" />
+                                <hc:NumericUpDown Grid.Column="0" Value="{Binding Variant.T1min}" Margin="0,6" />
                                 <Label HorizontalAlignment="Stretch" Content="≤ Температура в змеевике ≤" Height="35" Grid.Column="1" Background="{StaticResource Style3}" BorderBrush="{StaticResource Style3}"/>
-                                <hc:NumericUpDown hc:InfoElement.Title="" Grid.Column="2" Value="{Binding Task.T1max}" Margin="0,6" />
+                                <hc:NumericUpDown hc:InfoElement.Title="" Grid.Column="2" Value="{Binding Variant.T1max}" Margin="0,6" />
                                 <Label HorizontalAlignment="Stretch" Content="[ °C ]" Height="35" Grid.Column="3" Margin="6,0"/>
-                                <hc:NumericUpDown Grid.Row="1" Grid.Column="0" Value="{Binding Task.T2min}" Margin="0,6" />
+                                <hc:NumericUpDown Grid.Row="1" Grid.Column="0" Value="{Binding Variant.T2min}" Margin="0,6" />
                                 <Label Grid.Row="1" HorizontalAlignment="Stretch" Content="≤ Температура в рубашке ≤" Grid.Column="1" Background="{StaticResource Style3}" BorderBrush="{StaticResource Style3}" Height="35" />
-                                <hc:NumericUpDown Grid.Row="1" Grid.Column="2" Value="{Binding Task.T2max}" Margin="0,6" />
+                                <hc:NumericUpDown Grid.Row="1" Grid.Column="2" Value="{Binding Variant.T2max}" Margin="0,6" />
                                 <Label Grid.Row="1" HorizontalAlignment="Stretch" Content="[ °C ]" Height="35" Grid.Column="3" Margin="6,0"/>
                             </Grid>
                             <hc:ElementGroup Orientation="Horizontal" Margin="5, 2" />
@@ -219,7 +220,7 @@
                                           hc:InfoElement.TitlePlacement="Left"
                                           Style="{StaticResource NumericUpDownExtend}"
                                           HorizontalAlignment="Center"
-                                          Value="{Binding Task.TempCondition}" Width="426" Grid.Column="1"/>
+                                          Value="{Binding Variant.TempCondition}" Width="426" Grid.Column="1"/>
                                 <Label Grid.Column="3" HorizontalAlignment="Stretch" Content="[ °C ]" Height="35" Margin="6,0"/>
                             </Grid>
                         </StackPanel>

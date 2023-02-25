@@ -8,15 +8,15 @@ using View.Utils.Dialog;
 using View.Utils.MessageBoxService;
 
 
-namespace View.UserInterface.Admin.Task;
+namespace View.UserInterface.Admin.Variant;
 
-public class TaskExplorerControlVM : ViewModelBase
+public class VariantExplorerControlVM : ViewModelBase
 {
     #region Functions
 
     #region Constructors
 
-    public TaskExplorerControlVM(MethodDBContext context, DialogService ds, IMessageBoxService messageBoxService)
+    public VariantExplorerControlVM(MethodDBContext context, DialogService ds, IMessageBoxService messageBoxService)
     {
         _messageBoxService = messageBoxService;
         _context = context;
@@ -33,81 +33,81 @@ public class TaskExplorerControlVM : ViewModelBase
     private readonly DialogService _ds;
     private readonly MethodDBContext _context;
     private readonly IMessageBoxService _messageBoxService;
-    public DataAccess.Models.Task SelectedTask { get; set; }
+    public DataAccess.Models.Variant SelectedVariant { get; set; }
 
-    public List<DataAccess.Models.Task> Tasks => _context.Tasks.ToList();
+    public List<DataAccess.Models.Variant> Variants => _context.Variants.ToList();
 
     #endregion
 
 
     #region Commands
 
-    private RelayCommand _addTask;
+    private RelayCommand _addVariant;
 
     /// <summary>
     ///     Команда, открывающая окно создания нового задания
     /// </summary>
-    public RelayCommand AddTask
+    public RelayCommand AddVariant
     {
         get
         {
-            return _addTask ??= new RelayCommand(o =>
+            return _addVariant ??= new RelayCommand(o =>
             {
-                _ds.ShowDialog<TaskEditControl>(new WindowParameters
+                _ds.ShowDialog<VariantEditControl>(new WindowParameters
                 {
                     Height = 210,
                     Width = 300,
                     Title = "Добавление варианта задания",
                 },
-                data: new DataAccess.Models.Task());
+                data: new DataAccess.Models.Variant());
 
-                OnPropertyChanged(nameof(Task));
+                OnPropertyChanged(nameof(Variant));
             });
         }
     }
 
-    private RelayCommand _editTask;
+    private RelayCommand _editVariant;
 
     /// <summary>
     ///     Команда, открывающая окно редактирования задания
     /// </summary>
-    public RelayCommand EditTask
+    public RelayCommand EditVariant
     {
         get
         {
-            return _editTask ??= new RelayCommand(o =>
+            return _editVariant ??= new RelayCommand(o =>
             {
-                _ds.ShowDialog<TaskEditControl>(new WindowParameters
+                _ds.ShowDialog<VariantEditControl>(new WindowParameters
                 {
                     Height = 210,
                     Width = 300,
                     Title = "Редактирование варианта задания",
                 },
-                data: SelectedTask);
+                data: SelectedVariant);
 
-                OnPropertyChanged(nameof(Tasks));
-            }, _ => SelectedTask is not null);
+                OnPropertyChanged(nameof(Variants));
+            }, _ => SelectedVariant is not null);
         }
     }
 
-    private RelayCommand _deleteTask;
+    private RelayCommand _deleteVariant;
 
     /// <summary>
     ///     Команда, удаляющая задания
     /// </summary>
-    public RelayCommand DeleteTask
+    public RelayCommand DeleteVariant
     {
         get
         {
-            return _deleteTask ??= new RelayCommand(o =>
+            return _deleteVariant ??= new RelayCommand(o =>
             {
-                if (_messageBoxService.ShowMessage($"Вы действительно хотите удалить: \"{SelectedTask.Name}\"?", "Удаление метода оптимизации", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                if (_messageBoxService.ShowMessage($"Вы действительно хотите удалить: \"{SelectedVariant.Name}\"?", "Удаление варианта задания", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    _context.Tasks.Remove(SelectedTask);
+                    _context.Variants.Remove(SelectedVariant);
                     _context.SaveChanges();
                 }
-                OnPropertyChanged(nameof(Tasks));
-            }, c => SelectedTask is not null);
+                OnPropertyChanged(nameof(Variants));
+            }, c => SelectedVariant is not null);
         }
     }
 

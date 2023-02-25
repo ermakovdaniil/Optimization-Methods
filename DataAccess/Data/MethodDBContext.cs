@@ -18,7 +18,7 @@ public partial class MethodDBContext : DbContext
 
     public virtual DbSet<Method> Methods { get; set; }
 
-    public virtual DbSet<Task> Tasks { get; set; }
+    public virtual DbSet<Variant> Variants { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -41,13 +41,13 @@ public partial class MethodDBContext : DbContext
             entity.Property(e => e.Name).HasColumnName("name");
         });
 
-        modelBuilder.Entity<Task>(entity =>
+        modelBuilder.Entity<Variant>(entity =>
         {
-            entity.ToTable("task");
+            entity.ToTable("variant");
 
-            entity.HasIndex(e => e.Id, "IX_task_id").IsUnique();
+            entity.HasIndex(e => e.Id, "IX_variant_id").IsUnique();
 
-            entity.HasIndex(e => e.Name, "IX_task_name").IsUnique();
+            entity.HasIndex(e => e.Name, "IX_variant_name").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Alpha)

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:task="clr-namespace:View.UserInterface.Admin.Task"     
+             xmlns:variant="clr-namespace:View.UserInterface.Admin.Variant"     
              xmlns:method="clr-namespace:View.UserInterface.Admin.Method"
              xmlns:user="clr-namespace:View.UserInterface.Admin.User"
              xmlns:admin="clr-namespace:View.UserInterface.Admin"
@@ -39,7 +39,7 @@
                 <method:MethodExplorerControl />
             </TabItem>
             <TabItem Header="Редактирование оптимизационных задач" Background="{StaticResource Style2}">
-                <task:TaskExplorerControl />
+                <variant:VariantExplorerControl />
             </TabItem>
             <TabItem Header="Редактирование пользователей" Background="{StaticResource Style2}">
                 <user:UserExplorerControl />
