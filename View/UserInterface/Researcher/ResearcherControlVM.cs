@@ -20,9 +20,8 @@ namespace View.UserInterface.Researcher
 
     public class ResearcherControlVM : ViewModelBase
     {
-
         private object _data;
-        private readonly IMethod _method;
+        private readonly IMathModel _mathModel;
         private readonly IFileDialogService _dialogService;
         private readonly IMessageBoxService _messageBoxService;
         private readonly NavigationManager _navigationManager;
@@ -33,7 +32,7 @@ namespace View.UserInterface.Researcher
         public ResearcherControlVM(UserDBContext userContext,
                                    MethodDBContext methodsContext,
                                    NavigationManager navigationManager,
-                                   IMethod method,
+                                   IMathModel mathModel,
                                    IFileDialogService dialogService,
                                    IMessageBoxService messageBoxService,
                                    IUserService userService)
@@ -44,7 +43,7 @@ namespace View.UserInterface.Researcher
             _methodsContext = methodsContext;
             _methodsContext.Methods.Load();
             _navigationManager = navigationManager;
-            _method = method;
+            _mathModel = mathModel;
             _dialogService = dialogService;
             _messageBoxService = messageBoxService;
             _userService = userService;
@@ -138,8 +137,8 @@ namespace View.UserInterface.Researcher
                         try
                         {
                             IsCalculated = true;
-                            var methods = new Methods(Task);
-                            results = methods.Calculate(SelectedMethod, Task);
+                            //_mathModel = new MathModel(Task);
+                            results = _mathModel.Calculate(SelectedMethod, Task);
                             OnPropertyChanged(nameof(results));
                         }
                         catch (ArgumentException)

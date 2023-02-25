@@ -65,7 +65,7 @@ namespace View.UserInterface.Researcher.Charts
         {
             var dataX = new List<double>();
             var dataY = new List<double>();
-            var method = new Methods(Task);
+            var method = new MathModel(Task);
             var step = 1;
 
             for (double i = Task.T1min - step; i < Task.T1max + step; i += step)

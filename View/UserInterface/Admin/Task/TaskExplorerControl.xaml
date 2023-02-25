@@ -4,36 +4,70 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:controls="clr-namespace:WpfMath.Controls;assembly=WpfMath"  
              xmlns:task="clr-namespace:View.UserInterface.Admin.Task"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance task:TaskExplorerControlVM}"
              d:DesignHeight="450">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="130"/>
             <RowDefinition />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
+        <hc:ElementGroup Grid.Row="0" Background="{StaticResource Style2}" Orientation="Vertical">
+            <Grid Background="{StaticResource Style3}">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Background="{StaticResource Style2}">
+                    <hc:Divider Content="Уравнение" Margin="0 5" />
+                </Border>
+
+                <controls:FormulaControl Grid.Row="1" Scale="18" Margin="10" HorizontalAlignment="Center" Formula="R = P * \alpha * (G * \mu * ( (T_{2} - T_{1})^N + (\beta * A - T_{1})^N))"/>
+
+                <Border Grid.Row="2" Background="{StaticResource Style2}">
+                    <hc:Divider Content="" Margin="0 5" />
+                </Border>
+            </Grid>
+        </hc:ElementGroup>
         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Tasks}" CanUserAddRows="False"
                   IsReadOnly="True"
                   SelectionMode="Single"
-                  SelectedItem="{Binding SelectedTask}" Background="{StaticResource Style3}">
+                  SelectedItem="{Binding SelectedTask}" Background="{StaticResource Style3}" Margin="0,94,0,0" Grid.RowSpan="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
-                <DataGridTextColumn Header="Наименование" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="ID" Binding="{Binding SelectedTask.Id}" />
+                <DataGridTextColumn Header="Наименование" Binding="{Binding SelectedTask.Name}" />
+                <DataGridTextColumn Header="α" Binding="{Binding SelectedTask.Alpha}"/>
+                <DataGridTextColumn Header="β" Binding="{Binding SelectedTask.Beta}"/>
+                <DataGridTextColumn Header="μ" Binding="{Binding SelectedTask.Mu}"/>
+                <DataGridTextColumn Header="G" Binding="{Binding SelectedTask.MassConsumption}"/>
+                <DataGridTextColumn Header="A" Binding="{Binding SelectedTask.Pressure}"/>
+                <DataGridTextColumn Header="N" Binding="{Binding SelectedTask.Speed}"/>
+                <DataGridTextColumn Header="P" Binding="{Binding SelectedTask.Price}"/>
+                <DataGridTextColumn Header="Точность решения" Binding="{Binding SelectedTask.Precision}"/>
+                <DataGridTextColumn Header="T₁Min" Binding="{Binding SelectedTask.T1Min}"/>
+                <DataGridTextColumn Header="T₁Max" Binding="{Binding SelectedTask.T1Max}"/>
+                <DataGridTextColumn Header="T₂Min" Binding="{Binding SelectedTask.T2Min}"/>
+                <DataGridTextColumn Header="T₂Max" Binding="{Binding SelectedTask.T2Max}"/>
+                <DataGridTextColumn Header="Условие: T₁ + 0.5 * T₂ ≤ " Binding="{Binding SelectedTask.TempCondition}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Row="1" Background="{StaticResource Style2}">
+        <Grid Grid.Row="2" Background="{StaticResource Style2}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <!--<Button x:Name="AddButton" Width="100" hc:BorderElement.CornerRadius="10"
+                <Button x:Name="AddButton" Width="100" hc:BorderElement.CornerRadius="10"
                         Command="{Binding AddTask}" Content="{StaticResource AddButton}"
-                        Margin="0,0,10,0" Background="{StaticResource Style3}" />-->
+                        Margin="0,0,10,0" Background="{StaticResource Style3}" />
                 <Button x:Name="EditButton" Width="100" hc:BorderElement.CornerRadius="10"
                         Command="{Binding EditTask}"
                         Background="{StaticResource Style3}" Content="{StaticResource EditButton}" />
-                <!--<Button x:Name="ExitButton" Width="100" hc:BorderElement.CornerRadius="10"
+                <Button x:Name="ExitButton" Width="100" hc:BorderElement.CornerRadius="10"
                         Margin="10,0,0,0"
                         Command="{Binding DeleteTask}"
-                        Background="{StaticResource Style3}" Content="{StaticResource DeleteButton}" />-->
+                        Background="{StaticResource Style3}" Content="{StaticResource DeleteButton}" />
             </StackPanel>
         </Grid>
     </Grid>

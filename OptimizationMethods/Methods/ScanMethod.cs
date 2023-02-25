@@ -12,7 +12,6 @@ namespace OptimizationMethods.Methods
     {
         public static int CalculationCount { get; private set; }
 
-        private static readonly double _epsilon;
         private static readonly double _k = 10;
         private static readonly double _r = 2;
         private static double _step;
@@ -20,7 +19,7 @@ namespace OptimizationMethods.Methods
         public static void Calculate(DataAccess.Models.Task task, out CalculationResults results)
         {
             var funcMin = double.MaxValue;
-            _step = Math.Pow(_k, _r) * _epsilon;
+            _step = Math.Pow(_k, _r) * task.Precision;
             var points3D = new List<Point3D>();
             var p3D = new List<Point3D>();
             List<double> values;
@@ -53,7 +52,7 @@ namespace OptimizationMethods.Methods
         private static OptimizatonMethods.Models.Point SearchMinOnGrid(DataAccess.Models.Task task, out List<Point3D> points3D, out List<double> values)
         {
             points3D = new List<Point3D>();
-            var methods = new Methods(task);
+            var methods = new MathModel(task);
             for (var t1 = task.T1min; t1 <= task.T1max; t1 += _step)
             {
                 for (var t2 = task.T2min; t2 <= task.T2max; t2 += _step)

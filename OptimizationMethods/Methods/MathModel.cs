@@ -3,7 +3,7 @@ using System;
 
 namespace OptimizationMethods.Methods
 {
-    public class Methods : IMethod
+    public class MathModel : IMathModel
     {
         private readonly DataAccess.Models.Task _task;
         private readonly double _epsilon;
@@ -24,7 +24,9 @@ namespace OptimizationMethods.Methods
         private double t2max;
         private readonly double tempCondition;
 
-        public Methods(DataAccess.Models.Task task)
+        public MathModel() { }
+
+        public MathModel(DataAccess.Models.Task task)
         {
             _task = task;
             price = (double)_task.Price;

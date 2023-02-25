@@ -55,7 +55,7 @@ public partial class App : Application
         builder.RegisterType<NavigationManager>().AsSelf().SingleInstance();
         builder.RegisterType<UserControlFactory>().AsSelf();
         builder.RegisterType<DialogService>().AsSelf();
-        builder.RegisterType<Methods>().As<IMethod>();
+        builder.RegisterType<MathModel>().As<IMathModel>();
         builder.RegisterType<FileDialogService>().As<IFileDialogService>();
         builder.RegisterType<HandyMessageBoxService>().As<IMessageBoxService>();
         builder.RegisterType<UserService>().As<IUserService>().SingleInstance();

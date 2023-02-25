@@ -6,18 +6,94 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:task="clr-namespace:View.UserInterface.Admin.Task"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance task:TaskEditControlVM}">
+             d:DataContext="{d:DesignInstance task:TaskEditControlVM}" d:DesignWidth="566.647">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
         <StackPanel Background="{StaticResource Style2}">
-            <hc:TextBox hc:InfoElement.Title="Наименование метода"
+            <hc:TextBox hc:InfoElement.Title="Наименование задания"
                         hc:InfoElement.TitlePlacement="Top" Margin="10 5"
-                        Text="{Binding TempMethod.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding TempTask.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Background="{StaticResource Style3}" HorizontalAlignment="Stretch" />
-            <CheckBox Content="Активен" Margin="10 5" Height="20" />
+            <Grid Margin="9,5,0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5.4*" />
+                    <ColumnDefinition Width="1.2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <hc:NumericUpDown Grid.Row="0" Grid.Column="0" hc:InfoElement.Title="Нормирующий множитель, α"
+                                      hc:InfoElement.TitlePlacement="Left" hc:InfoElement.TitleWidth="3*" ValueFormat="N2"
+                                      Style="{StaticResource NumericUpDownExtend}" Margin="10 3" Increment="0.01" Minimum="0.01"
+                                      Value="{Binding TempTask.Alpha}" />
+                <hc:NumericUpDown Grid.Row="1" Grid.Column="0" hc:InfoElement.Title="Нормирующий множитель, β"
+                                      hc:InfoElement.TitlePlacement="Left" hc:InfoElement.TitleWidth="3*" ValueFormat="N2"
+                                      Style="{StaticResource NumericUpDownExtend}" Margin="10 3" Increment="0.01" Minimum="0.01"
+                                      Value="{Binding TempTask.Beta}" />
+                <hc:NumericUpDown Grid.Row="2" Grid.Column="0" hc:InfoElement.Title="Нормирующий множитель, μ"
+                                      hc:InfoElement.TitlePlacement="Left" hc:InfoElement.TitleWidth="3*" ValueFormat="N2"
+                                      Style="{StaticResource NumericUpDownExtend}" Margin="10 3" Increment="0.01" Minimum="0.01"
+                                      Value="{Binding TempTask.Mu}" />
+                <hc:NumericUpDown Grid.Row="3" Grid.Column="0" hc:InfoElement.Title="Расход реационной массы, G"
+                                      hc:InfoElement.TitlePlacement="Left" hc:InfoElement.TitleWidth="3*" ValueFormat="N0" Minimum="1"
+                                      Style="{StaticResource NumericUpDownExtend}" Margin="10 3" 
+                                      Value="{Binding TempTask.MassConsumption}" />
+                <Label HorizontalAlignment="Stretch" Content="[ кг/ч ]" Height="35" Margin="10 3" Grid.Row="3" Grid.Column="1"/>
+                <hc:NumericUpDown Grid.Row="4" Grid.Column="0" hc:InfoElement.Title="Давление в реактор, А" hc:InfoElement.TitleWidth="3*"
+                                      hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N1" Increment="0.1" Minimum="0.1"
+                                      Margin="10 3" Value="{Binding TempTask.Pressure}" />
+                <Label HorizontalAlignment="Stretch" Content="[ кПа ]" Height="35" Margin="10 3" Grid.Row="4" Grid.Column="1"/>
+                <hc:NumericUpDown Grid.Row="5" Grid.Column="0" hc:InfoElement.Title="Скорость вращения мешалки, N" hc:InfoElement.TitleWidth="3*"
+                                      hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N0" Minimum="1"
+                                      Margin="10 3" Value="{Binding TempTask.Speed}" />
+                <Label HorizontalAlignment="Stretch" Content="[ об/с ]" Height="35" Margin="10 3" Grid.Row="5" Grid.Column="1"/>
+                <hc:NumericUpDown Grid.Row="6" Grid.Column="0" hc:InfoElement.Title="Стоимость производства 1 кг, P" ValueFormat="N2" Increment="0.01" Minimum="0.01"
+                                      hc:InfoElement.TitleWidth="3*"
+                                      hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}"
+                                      Margin="10 3" Value="{Binding TempTask.Price}" />
+                <Label HorizontalAlignment="Stretch" Content="[ у.е. ]" Height="35" Margin="10 3" Grid.Row="6" Grid.Column="1"/>
+                <hc:NumericUpDown Grid.Row="7" Grid.Column="0" hc:InfoElement.Title="Точность решения" hc:InfoElement.TitleWidth="3*"
+                                      hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" Increment="0.01" Minimum="0.01"
+                                      Margin="10 3" Value="{Binding TempTask.Precision}" />
+                <Label HorizontalAlignment="Stretch" Content="[ °C ]" Height="35" Margin="10 3" Grid.Row="7" Grid.Column="1"/>
+                <hc:NumericUpDown Grid.Row="8" Grid.Column="0" hc:InfoElement.Title="Минимальная температура в змеевике, T₁Min" hc:InfoElement.TitleWidth="3*"
+                                      hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" Increment="0.01" Minimum="0.01"
+                                      Margin="10 3" Value="{Binding TempTask.T1min}" />
+                <Label HorizontalAlignment="Stretch" Content="[ °C ]" Height="35" Margin="10 3" Grid.Row="8" Grid.Column="1"/>
+                <hc:NumericUpDown Grid.Row="9" Grid.Column="0" hc:InfoElement.Title="Максимальная температура в змеевике, T₁Max" hc:InfoElement.TitleWidth="3*"
+                                      hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" Increment="0.01" Minimum="0.01"
+                                      Margin="10 3" Value="{Binding TempTask.T1max}" />
+                <Label HorizontalAlignment="Stretch" Content="[ °C ]" Height="35" Margin="10 3" Grid.Row="9" Grid.Column="1"/>
+                <hc:NumericUpDown Grid.Row="10" Grid.Column="0" hc:InfoElement.Title="Минимальная температура в змеевике, T₂Min" hc:InfoElement.TitleWidth="3*"
+                                      hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" Increment="0.01" Minimum="0.01"
+                                      Margin="10 3" Value="{Binding TempTask.T2min}" />
+                <Label HorizontalAlignment="Stretch" Content="[ °C ]" Height="35" Margin="10 3" Grid.Row="10" Grid.Column="1"/>
+                <hc:NumericUpDown Grid.Row="11" Grid.Column="0" hc:InfoElement.Title="Максимальная температура в змеевике, T₂Max" hc:InfoElement.TitleWidth="3*"
+                                      hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" Increment="0.01" Minimum="0.01"
+                                      Margin="10 3" Value="{Binding TempTask.T2max}" />
+                <Label HorizontalAlignment="Stretch" Content="[ °C ]" Height="35" Margin="10 3" Grid.Row="11" Grid.Column="1"/>
+                <hc:NumericUpDown Grid.Row="12" Grid.Column="0" hc:InfoElement.Title="Условие T₁ + 0.5 * T₂ ≤ " hc:InfoElement.TitleWidth="3*"
+                                      hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" Increment="0.01" Minimum="0.01"
+                                      Margin="10 3" Value="{Binding TempTask.TempCondition}" />
+                <Label HorizontalAlignment="Stretch" Content="[ °C ]" Height="35" Margin="10 3" Grid.Row="12" Grid.Column="1"/>
+
+            </Grid>
 
             <!--hc:InfoElement.Title="Активен"
                 c:InfoElement.TitlePlacement="Top" Margin="10 5"

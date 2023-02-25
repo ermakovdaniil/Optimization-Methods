@@ -17,13 +17,7 @@
                         hc:InfoElement.TitlePlacement="Top" Margin="10 5"
                         Text="{Binding TempMethod.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Background="{StaticResource Style3}" HorizontalAlignment="Stretch" />
-            <CheckBox Content="Активен" Margin="10 5" Height="20" />
-
-            <!--hc:InfoElement.Title="Активен"
-                c:InfoElement.TitlePlacement="Top" Margin="10 5"
-                Text="{Binding TempMethod.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                 Background="{StaticResource Style3}" HorizontalAlignment="Stretch"-->
-            
+            <CheckBox Content="Активен" IsChecked ="{Binding TempMethod.Active, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 5" Height="20" />
         </StackPanel>
         <Grid Row="1" Background="{StaticResource Style1}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

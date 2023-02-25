@@ -20,7 +20,7 @@
                 </MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem ToolTip="Рассчитать целевую функцию" Command="{Binding CalculateCommand}">
+            <MenuItem ToolTip="Рассчитать целевую функцию" Click="CreateCharts" Command="{Binding CalculateCommand}">
                 <MenuItem.Icon>
                     <Image Height="20" Source="pack://application:,,,/resources/icons/scanning.png" />
                 </MenuItem.Icon>
@@ -147,38 +147,38 @@
                                 <RowDefinition />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <hc:NumericUpDown Grid.Row="0" Grid.Column="0" hc:InfoElement.Title="Нормирующий множитель α"
+                            <hc:NumericUpDown Grid.Row="0" Grid.Column="0" hc:InfoElement.Title="Нормирующий множитель, α"
                                       hc:InfoElement.TitlePlacement="Left" hc:InfoElement.TitleWidth="3*" ValueFormat="N2"
                                       Style="{StaticResource NumericUpDownExtend}" Margin="10 3" Increment="0.01" Minimum="0.01"
                                       Value="{Binding Task.Alpha}" />
-                            <hc:NumericUpDown Grid.Row="1" Grid.Column="0" hc:InfoElement.Title="Нормирующий множитель β"
+                            <hc:NumericUpDown Grid.Row="1" Grid.Column="0" hc:InfoElement.Title="Нормирующий множитель, β"
                                       hc:InfoElement.TitlePlacement="Left" hc:InfoElement.TitleWidth="3*" ValueFormat="N2"
                                       Style="{StaticResource NumericUpDownExtend}" Margin="10 3" Increment="0.01" Minimum="0.01"
                                       Value="{Binding Task.Beta}" />
-                            <hc:NumericUpDown Grid.Row="2" Grid.Column="0" hc:InfoElement.Title="Нормирующий множитель μ"
+                            <hc:NumericUpDown Grid.Row="2" Grid.Column="0" hc:InfoElement.Title="Нормирующий множитель, μ"
                                       hc:InfoElement.TitlePlacement="Left" hc:InfoElement.TitleWidth="3*" ValueFormat="N2"
                                       Style="{StaticResource NumericUpDownExtend}" Margin="10 3" Increment="0.01" Minimum="0.01"
                                       Value="{Binding Task.Mu}" />
-                            <hc:NumericUpDown Grid.Row="3" Grid.Column="0" hc:InfoElement.Title="Расход реационной массы G"
+                            <hc:NumericUpDown Grid.Row="3" Grid.Column="0" hc:InfoElement.Title="Расход реационной массы, G"
                                       hc:InfoElement.TitlePlacement="Left" hc:InfoElement.TitleWidth="3*" ValueFormat="N0" Minimum="1"
                                       Style="{StaticResource NumericUpDownExtend}" Margin="10 3" 
                                       Value="{Binding Task.MassConsumption}" />
                             <Label HorizontalAlignment="Stretch" Content="[ кг/ч ]" Height="35" Margin="10 3" Grid.Row="3" Grid.Column="1"/>
-                            <hc:NumericUpDown Grid.Row="4" Grid.Column="0" hc:InfoElement.Title="Давление в реактор А" hc:InfoElement.TitleWidth="3*"
+                            <hc:NumericUpDown Grid.Row="4" Grid.Column="0" hc:InfoElement.Title="Давление в реактор, А" hc:InfoElement.TitleWidth="3*"
                                       hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N1" Increment="0.1" Minimum="0.1"
                                       Margin="10 3" Value="{Binding Task.Pressure}" />
                             <Label HorizontalAlignment="Stretch" Content="[ кПа ]" Height="35" Margin="10 3" Grid.Row="4" Grid.Column="1"/>
-                            <hc:NumericUpDown Grid.Row="5" Grid.Column="0" hc:InfoElement.Title="Скорость вращения мешалки N" hc:InfoElement.TitleWidth="3*"
+                            <hc:NumericUpDown Grid.Row="5" Grid.Column="0" hc:InfoElement.Title="Скорость вращения мешалки, N" hc:InfoElement.TitleWidth="3*"
                                       hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N0" Minimum="1"
                                       Margin="10 3" Value="{Binding Task.Speed}" />
                             <Label HorizontalAlignment="Stretch" Content="[ об/с ]" Height="35" Margin="10 3" Grid.Row="5" Grid.Column="1"/>
-                            <hc:NumericUpDown Grid.Row="6" Grid.Column="0" hc:InfoElement.Title="Стоимость производства 1 кг" ValueFormat="N2" Increment="0.01" Minimum="0.01"
+                            <hc:NumericUpDown Grid.Row="6" Grid.Column="0" hc:InfoElement.Title="Стоимость производства 1 кг, P" ValueFormat="N2" Increment="0.01" Minimum="0.01"
                                       hc:InfoElement.TitleWidth="3*"
                                       hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}"
                                       Margin="10 3" Value="{Binding Task.Price}" />
                             <Label HorizontalAlignment="Stretch" Content="[ у.е. ]" Height="35" Margin="10 3" Grid.Row="6" Grid.Column="1"/>
                             <hc:NumericUpDown Grid.Row="7" Grid.Column="0" hc:InfoElement.Title="Точность решения" hc:InfoElement.TitleWidth="3*"
-                                      hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N3" Increment="0.01" Minimum="0.001"
+                                      hc:InfoElement.TitlePlacement="Left" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" Increment="0.01" Minimum="0.01"
                                       Margin="10 3" Value="{Binding Task.Precision}" />
                             <Label HorizontalAlignment="Stretch" Content="[ °C ]" Height="35" Margin="10 3" Grid.Row="7" Grid.Column="1"/>
                         </Grid>

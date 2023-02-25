@@ -74,19 +74,19 @@ public partial class MethodDBContext : DbContext
                 .HasColumnName("price");
             entity.Property(e => e.Speed).HasColumnName("speed");
             entity.Property(e => e.T1max)
-                .HasColumnType("DOUBLE (4, 1)")
+                .HasColumnType("DOUBLE (4, 2)")
                 .HasColumnName("t1max");
             entity.Property(e => e.T1min)
-                .HasColumnType("DOUBLE (4, 1)")
+                .HasColumnType("DOUBLE (4, 2)")
                 .HasColumnName("t1min");
             entity.Property(e => e.T2max)
-                .HasColumnType("DOUBLE (4, 1)")
+                .HasColumnType("DOUBLE (4, 2)")
                 .HasColumnName("t2max");
             entity.Property(e => e.T2min)
-                .HasColumnType("DOUBLE (4, 1)")
+                .HasColumnType("DOUBLE (4, 2)")
                 .HasColumnName("t2min");
             entity.Property(e => e.TempCondition)
-                .HasColumnType("DOUBLE (4, 1)")
+                .HasColumnType("DOUBLE (4, 2)")
                 .HasColumnName("tempCondition");
         });
 

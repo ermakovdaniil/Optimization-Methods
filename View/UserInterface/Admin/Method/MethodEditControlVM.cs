@@ -40,6 +40,7 @@ public class MethodEditControlVM : ViewModelBase, IDataHolder, IResultHolder, II
             {
                 Id = EditingMethod.Id,
                 Name = EditingMethod.Name,
+                Active = EditingMethod.Active,
             };
 
             OnPropertyChanged(nameof(TempMethod));
@@ -79,6 +80,7 @@ public class MethodEditControlVM : ViewModelBase, IDataHolder, IResultHolder, II
             {
                 EditingMethod.Id = TempMethod.Id;
                 EditingMethod.Name = TempMethod.Name;
+                EditingMethod.Active = TempMethod.Active;
 
                 if (!_context.Methods.Contains(EditingMethod))
                 {
