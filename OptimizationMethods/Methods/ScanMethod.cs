@@ -15,9 +15,18 @@ namespace OptimizationMethods.Methods
         private static readonly double _k = 10;
         private static readonly double _r = 2;
         private static double _step;
+        private static double t1min;
+        private static double t1max;
+        private static double t2min;
+        private static double t2max;
 
         public static void Calculate(Variant variant, out CalculationResults results)
         {
+            t1min = variant.T1min;
+            t2min = variant.T2min;
+            t1max = variant.T1max;
+            t2max = variant.T2max;
+
             var funcMin = double.MaxValue;
             _step = Math.Pow(_k, _r) * variant.Precision;
             var points3D = new List<Point3D>();
@@ -25,20 +34,20 @@ namespace OptimizationMethods.Methods
             List<double> values;
             OptimizatonMethods.Models.Point newMin;
             newMin = SearchMinOnGrid(variant, out p3D, out values);
-            variant.T1min = newMin.X - _step;
-            variant.T2min = newMin.Y - _step;
-            variant.T1max = newMin.X + _step;
-            variant.T2max = newMin.Y + _step;
+            t1min = newMin.X - _step;
+            t2min = newMin.Y - _step;
+            t1max = newMin.X + _step;
+            t2max = newMin.Y + _step;
             _step /= _k;
             points3D.AddRange(p3D);
 
             while (funcMin > values.Min())
             {
                 newMin = SearchMinOnGrid(variant, out p3D, out values);
-                variant.T1min = newMin.X - _step;
-                variant.T2min = newMin.Y - _step;
-                variant.T1max = newMin.X + _step;
-                variant.T2max = newMin.Y + _step;
+                t1min = newMin.X - _step;
+                t2min = newMin.Y - _step;
+                t1max = newMin.X + _step;
+                t2max = newMin.Y + _step;
                 _step /= _k;
                 funcMin = values.Min();
                 points3D.AddRange(p3D);
@@ -53,9 +62,9 @@ namespace OptimizationMethods.Methods
         {
             points3D = new List<Point3D>();
             //var methods = new MathModel(variant);
-            for (var t1 = variant.T1min; t1 <= variant.T1max; t1 += _step)
+            for (var t1 = t1min; t1 <= t1max; t1 += _step)
             {
-                for (var t2 = variant.T2min; t2 <= variant.T2max; t2 += _step)
+                for (var t2 = t2min; t2 <= t2max; t2 += _step)
                 {
                     if (!variant.Conditions(t1, t2))
                     {

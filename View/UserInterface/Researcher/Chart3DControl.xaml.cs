@@ -68,12 +68,12 @@ namespace View.UserInterface.Researcher.Charts
             //var method = new MathModel(Variant);
             var step = 1;
 
-            for (double i = Variant.T1min - step; i < Variant.T1max + step; i += step)
+            for (double i = _variant.T1min - step; i < _variant.T1max + step; i += step)
             {
                 dataX.Add(i);
             }
 
-            for (double i = Variant.T2min - step; i < Variant.T2max + step; i += step)
+            for (double i = _variant.T2min - step; i < _variant.T2max + step; i += step)
             {
                 dataY.Add(i);
             }
@@ -93,7 +93,7 @@ namespace View.UserInterface.Researcher.Charts
             {
                 for (int j = 0; j < dataY.Count; j++)
                 {
-                    dataZ[j * dataX.Count + i] = Variant.Function(dataX[i], dataY[j]);
+                    dataZ[j * dataX.Count + i] = _variant.Function(dataX[i], dataY[j]);
                 }
             }
             chart = new SurfaceChart(1299, 865);

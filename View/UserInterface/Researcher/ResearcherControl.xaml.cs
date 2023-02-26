@@ -29,7 +29,7 @@ public partial class ResearcherControl : UserControl
     private void CreateCharts(object sender, RoutedEventArgs e)
     {
         //((ResearcherControlVM)DataContext).CalculateCommand.Execute(null);
-        Chart2D.drawChart(((ResearcherControlVM)DataContext).Variant);
+        Chart2D.Variant = ((ResearcherControlVM)DataContext).Variant;
         Chart3D.Variant = ((ResearcherControlVM)DataContext).Variant;
     }
 }

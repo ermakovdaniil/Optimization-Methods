@@ -52,6 +52,7 @@ public class VariantEditControlVM : ViewModelBase, IDataHolder, IResultHolder, I
                 T1min = EditingVariant.T1min,
                 T2max = EditingVariant.T2max,
                 T2min = EditingVariant.T2min,
+                TempCondition = EditingVariant.TempCondition,
             };
 
             OnPropertyChanged(nameof(TempVariant));
@@ -65,13 +66,13 @@ public class VariantEditControlVM : ViewModelBase, IDataHolder, IResultHolder, I
 
     #region Properties
 
-    public Variant TempVariant { get; set; }
+    public DataAccess.Models.Variant TempVariant { get; set; }
 
-    public Variant EditingVariant => (DataAccess.Models.Variant)Data;
+    public DataAccess.Models.Variant EditingVariant => (DataAccess.Models.Variant)Data;
 
     private readonly MethodDBContext _context;
 
-    public List<Variant> Variants => _context.Variants.ToList();
+    public List<DataAccess.Models.Variant> Variants => _context.Variants.ToList();
 
     #endregion
 

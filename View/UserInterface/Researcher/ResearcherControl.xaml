@@ -244,7 +244,7 @@
                     <Border Grid.Row="0" Grid.Column="0" Background="{StaticResource Style2}">
                         <hc:Divider Content="Таблица значений" Margin="0 5" />
                     </Border>
-                    <DataGrid Grid.Row="1" Grid.Column="0" ItemsSource="{Binding MathModel.Results.Points3D}" 
+                    <DataGrid Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Results.Points3D}" 
                               AutoGenerateColumns="True" AutoGeneratingColumn="OnAutoGeneratingColumn" 
                               CanUserAddRows="False" IsReadOnly="True"
                               ColumnWidth="*" Background="{StaticResource Style3}">
@@ -270,21 +270,21 @@
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 0"
                                                 hc:InfoElement.TitleWidth="230"
-                                                Text="{Binding CalculationResults.Price, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Text="{Binding Results.Price, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                                 HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Height="40" />
                         <Label HorizontalAlignment="Stretch" Content="[ у.е. ]" Height="40" Margin="10 3" Grid.Row="0" Grid.Column="1"/>
                         <hc:TextBox hc:InfoElement.Title="Температура в змеевике"
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                 hc:InfoElement.TitleWidth="230"
-                                                Text="{Binding CalculationResults.T1, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Text="{Binding Results.T1, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                                 HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="0" Height="40" />
                         <Label HorizontalAlignment="Stretch" Content="[ °C ]" Height="40" Margin="10 3" Grid.Row="1" Grid.Column="1" />
                         <hc:TextBox hc:InfoElement.Title="Температура в рубашке"
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                 hc:InfoElement.TitleWidth="230"
-                                                Text="{Binding CalculationResults.T2, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Text="{Binding Results.T2, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                                 HorizontalAlignment="Stretch" Grid.Row="2" Grid.Column="0" Height="40"/>
                         <Label HorizontalAlignment="Stretch" Content="[ °C ]" Height="40" Margin="10 3" Grid.Row="2" Grid.Column="1"/>
                     </Grid>

@@ -38,8 +38,7 @@ namespace View.UserInterface.Researcher
                                    IUserService userService)
         {
             Variant = new Variant { Alpha = 1, Beta = 1, Mu = 1, MassConsumption = 2, Pressure = 1, Speed = 2, Price = 100, Precision = 0.01, T1min = -3, T1max = 3, T2min = -2, T2max = 6, TempCondition = 1 };
-            IsCalculated = false;
-            _isCalculated = false;
+            TabControlVisibility = Visibility.Hidden;
             _userContext = userContext;
             _methodsContext = methodsContext;
             _methodsContext.Methods.Load();
