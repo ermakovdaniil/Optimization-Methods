@@ -98,7 +98,7 @@ namespace View.UserInterface.Researcher
                 OnPropertyChanged();
             }
         }
-        
+
         private IEnumerable _dataList;
         public IEnumerable DataList
         {
@@ -128,16 +128,16 @@ namespace View.UserInterface.Researcher
             {
                 return _calculateCommand ??= new RelayCommand(_ =>
                 {
-                    if (SelectedMethod is null)
-                    {
-                        _messageBoxService.ShowMessage("Не выбран метод оптимизации.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    if (Variant.T1min >= Variant.T1max && Variant.T2min >= Variant.T2max)
-                    {
-                        _messageBoxService.ShowMessage("Минимальная температура не может быть больше максимальной.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    else
-                    {
+                    //if (SelectedMethod is null)
+                    //{
+                    //    _messageBoxService.ShowMessage("Не выбран метод оптимизации.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    //}
+                    //if (Variant.T1min >= Variant.T1max && Variant.T2min >= Variant.T2max)
+                    //{
+                    //    _messageBoxService.ShowMessage("Минимальная температура не может быть больше максимальной.", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    //}
+                    //else
+                    //{
                         try
                         {
                             IsCalculated = true;
@@ -159,11 +159,19 @@ namespace View.UserInterface.Researcher
                             Variant a = Variant;
                             OnPropertyChanged(nameof(Results));
                         }
-                        catch (ArgumentException)
+                        catch (NullReferenceException)
                         {
-                            _messageBoxService.ShowMessage(".", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                            _messageBoxService.ShowMessage(
+                                "Невозможно произвести расчёт.\n" +
+                                "\n" +
+                                "Вероятные причины ошибки:\n" +
+                                "   * Не выбран метод оптимизации.\n" +
+                                "   * Неверно указаны температуры.\n" +
+                                "      Минимальная температура не может быть больше максимальной.\n" +
+                                "   * Неверно указана точность расчёта.", "Ошибка!",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
                         }
-                    }
+                    //}
                 });
             }
         }
