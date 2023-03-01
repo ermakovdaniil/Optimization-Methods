@@ -15,8 +15,8 @@
            d:DataContext="{d:DesignInstance userInterface:MainWindowVM}"
            WindowStartupLocation="CenterScreen">
     <hc:Window.NonClientAreaContent>
-        <StackPanel Orientation="Horizontal" Height="40">
-            <Image Source="pack://application:,,,/resources/icons/image-analysis.png" Margin="3"
+        <StackPanel Orientation="Horizontal" Height="35">
+            <Image Source="pack://application:,,,/resources/icons/optimization.png" Margin="3"
                    RenderOptions.BitmapScalingMode="HighQuality" />
             <TextBlock Text="{Binding Title,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}"
                        Background="{Binding NonClientAreaBackground,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}"

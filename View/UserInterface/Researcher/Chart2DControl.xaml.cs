@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Controls;
-using ChartDirector;
+﻿using ChartDirector;
 using DataAccess.Models;
 using OptimizationMethods.Methods;
 using OptimizatonMethods.Models;
+using System.Collections.Generic;
+using System.Windows.Controls;
 
 
 namespace View.UserInterface.Researcher.Charts

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Controls;
-using System.ComponentModel;
-using ChartDirector;
-
-using OptimizatonMethods.Models;
+﻿using ChartDirector;
 using DataAccess.Models;
 using OptimizationMethods.Methods;
+using OptimizatonMethods.Models;
+using System.Collections.Generic;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace View.UserInterface.Researcher.Charts
 {
@@ -105,7 +101,7 @@ namespace View.UserInterface.Researcher.Charts
             }
             chart.setData(dataX.ToArray(), dataY.ToArray(), dataZ.ToArray());
             chart.setInterpolation(80, 80);
-            var majorGridColor = unchecked((int) 0xc0000000);
+            var majorGridColor = unchecked((int)0xc0000000);
             var minorGridColor = chart.dashLineColor(majorGridColor, Chart.DotLine);
             chart.setSurfaceAxisGrid(majorGridColor, majorGridColor, minorGridColor, minorGridColor);
             chart.addXYProjection();

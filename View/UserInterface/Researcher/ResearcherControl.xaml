@@ -22,7 +22,7 @@
 
             <MenuItem ToolTip="Рассчитать целевую функцию" Command="{Binding CalculateCommand}" Click="CreateCharts">
                 <MenuItem.Icon>
-                    <Image Height="20" Source="pack://application:,,,/resources/icons/scanning.png" />
+                    <Image Height="20" Source="pack://application:,,,/resources/icons/line-chart.png" />
                 </MenuItem.Icon>
             </MenuItem>
 
@@ -40,7 +40,7 @@
 
             <MenuItem ToolTip="Показать условие" Command="{Binding WatchInfo}">
                 <MenuItem.Icon>
-                    <Image Height="20" Source="pack://application:,,,/resources/icons/info.png" />
+                    <Image Height="20" Source="pack://application:,,,/resources/icons/info2.png" />
                 </MenuItem.Icon>
             </MenuItem>
 

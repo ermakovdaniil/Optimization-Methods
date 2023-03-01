@@ -39,21 +39,21 @@
                   SelectionMode="Single"
                   SelectedItem="{Binding SelectedVariant}" Background="{StaticResource Style3}" Margin="0,94,0,0" Grid.RowSpan="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding SelectedVariant.Id}" />
-                <DataGridTextColumn Header="Наименование" Binding="{Binding SelectedVariant.Name}" />
-                <DataGridTextColumn Header="α" Binding="{Binding SelectedVariant.Alpha}"/>
-                <DataGridTextColumn Header="β" Binding="{Binding SelectedVariant.Beta}"/>
-                <DataGridTextColumn Header="μ" Binding="{Binding SelectedVariant.Mu}"/>
-                <DataGridTextColumn Header="G" Binding="{Binding SelectedVariant.MassConsumption}"/>
-                <DataGridTextColumn Header="A" Binding="{Binding SelectedVariant.Pressure}"/>
-                <DataGridTextColumn Header="N" Binding="{Binding SelectedVariant.Speed}"/>
-                <DataGridTextColumn Header="P" Binding="{Binding SelectedVariant.Price}"/>
-                <DataGridTextColumn Header="Точность решения" Binding="{Binding SelectedVariant.Precision}"/>
-                <DataGridTextColumn Header="T₁Min" Binding="{Binding SelectedVariant.T1Min}"/>
-                <DataGridTextColumn Header="T₁Max" Binding="{Binding SelectedVariant.T1Max}"/>
-                <DataGridTextColumn Header="T₂Min" Binding="{Binding SelectedVariant.T2Min}"/>
-                <DataGridTextColumn Header="T₂Max" Binding="{Binding SelectedVariant.T2Max}"/>
-                <DataGridTextColumn Header="Условие: T₁ + 0.5 * T₂ ≤ " Binding="{Binding SelectedVariant.TempCondition}"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Наименование" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="α" Binding="{Binding Alpha}"/>
+                <DataGridTextColumn Header="β" Binding="{Binding Beta}"/>
+                <DataGridTextColumn Header="μ" Binding="{Binding Mu}"/>
+                <DataGridTextColumn Header="G" Binding="{Binding MassConsumption}"/>
+                <DataGridTextColumn Header="A" Binding="{Binding Pressure}"/>
+                <DataGridTextColumn Header="N" Binding="{Binding Speed}"/>
+                <DataGridTextColumn Header="P" Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="Точность решения" Binding="{Binding Precision}"/>
+                <DataGridTextColumn Header="T₁Min" Binding="{Binding T1Min}"/>
+                <DataGridTextColumn Header="T₁Max" Binding="{Binding T1Max}"/>
+                <DataGridTextColumn Header="T₂Min" Binding="{Binding T2Min}"/>
+                <DataGridTextColumn Header="T₂Max" Binding="{Binding T2Max}"/>
+                <DataGridTextColumn Header="Условие: T₁ + 0.5 * T₂ ≤ " Binding="{Binding TempCondition}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="2" Background="{StaticResource Style2}">

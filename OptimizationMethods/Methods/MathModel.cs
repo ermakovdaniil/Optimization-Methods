@@ -1,5 +1,4 @@
 ﻿using DataAccess.Models;
-using System;
 
 namespace OptimizationMethods.Methods
 {

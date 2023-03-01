@@ -138,39 +138,39 @@ namespace View.UserInterface.Researcher
                     //}
                     //else
                     //{
-                        try
+                    try
+                    {
+                        IsCalculated = true;
+                        //_mathModel = new MathModel(Variant);
+                        CalculationResults result = new CalculationResults();
+                        switch (SelectedMethod.Id)
                         {
-                            IsCalculated = true;
-                            //_mathModel = new MathModel(Variant);
-                            CalculationResults result = new CalculationResults();
-                            switch (SelectedMethod.Id)
-                            {
-                                case 1:
-                                    ScanMethod.Calculate(Variant, out result);
-                                    break;
-                                case 2:
-                                    //BoxMethod.Calculate(variant, out results);
-                                    break;
-                                default:
-                                    break;
-                            }
-                            Results = result;
-                            //results = _mathModel.Calculate(SelectedMethod, Variant);
-                            Variant a = Variant;
-                            OnPropertyChanged(nameof(Results));
+                            case 1:
+                                ScanMethod.Calculate(Variant, out result);
+                                break;
+                            case 2:
+                                //BoxMethod.Calculate(variant, out results);
+                                break;
+                            default:
+                                break;
                         }
-                        catch (NullReferenceException)
-                        {
-                            _messageBoxService.ShowMessage(
-                                "Невозможно произвести расчёт.\n" +
-                                "\n" +
-                                "Вероятные причины ошибки:\n" +
-                                "   * Не выбран метод оптимизации.\n" +
-                                "   * Неверно указаны температуры.\n" +
-                                "      Минимальная температура не может быть больше максимальной.\n" +
-                                "   * Неверно указана точность расчёта.", "Ошибка!",
-                                MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
+                        Results = result;
+                        //results = _mathModel.Calculate(SelectedMethod, Variant);
+                        Variant a = Variant;
+                        OnPropertyChanged(nameof(Results));
+                    }
+                    catch (NullReferenceException)
+                    {
+                        _messageBoxService.ShowMessage(
+                            "Невозможно произвести расчёт.\n" +
+                            "\n" +
+                            "Вероятные причины ошибки:\n" +
+                            "   * Не выбран метод оптимизации.\n" +
+                            "   * Неверно указаны температуры.\n" +
+                            "      Минимальная температура не может быть больше максимальной.\n" +
+                            "   * Неверно указана точность расчёта.", "Ошибка!",
+                            MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                     //}
                 });
             }
