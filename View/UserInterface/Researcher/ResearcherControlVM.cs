@@ -149,7 +149,7 @@ namespace View.UserInterface.Researcher
                                 ScanMethod.Calculate(Variant, out result);
                                 break;
                             case 2:
-                                //BoxMethod.Calculate(variant, out results);
+                                BoxMethod.Calculate(Variant, out result);
                                 break;
                             default:
                                 break;
@@ -161,6 +161,7 @@ namespace View.UserInterface.Researcher
                     }
                     catch (NullReferenceException)
                     {
+                        IsCalculated = false;
                         _messageBoxService.ShowMessage(
                             "Невозможно произвести расчёт.\n" +
                             "\n" +

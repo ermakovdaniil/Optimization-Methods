@@ -19,14 +19,23 @@ namespace OptimizationMethods.Methods
         private static Point3D _bestVertex;
         private static Point3D _center;
         private static List<Point3D> _complex;
-        private static int vertexCount = 3;
+        private static int _vertexCount = 3;
         private static Variant _variant;
+        private static readonly double _k = 10;
+        private static readonly double _r = 2;
 
         public static void Calculate(Variant variant, out CalculationResults results)
         {
-            _eps = variant.Precision;
-            _complex = GetInitialComplex();
             _variant = variant;
+            _step = Math.Pow(_k, _r) * _variant.Precision;
+            _eps = _variant.Precision;
+            _t1min = _variant.T1min;
+            _t2min = _variant.T2min;
+            _t1max = _variant.T1max;
+            _t2max = _variant.T2max;
+            _complex = GetInitialComplex();
+
+            var points3D = new List<Point3D>();
             do
             {
                 _worstVertex = _complex.MaxBy(p => p.Z);
@@ -43,6 +52,10 @@ namespace OptimizationMethods.Methods
                 while (!_variant.SecondCondition(newVertex.X, newVertex.Y))
                 {
                     HalfShiftVertex1ToVertex2(newVertex, _center);
+                    //if (newVertex == _center)
+                    //{
+                    //    continue;
+                    //}
                 }
 
                 while (newVertex.Z > _worstVertex.Z)
@@ -53,15 +66,8 @@ namespace OptimizationMethods.Methods
                 _complex.Remove(_worstVertex);
                 _complex.Add(newVertex);
             } while (GetB() >= _eps);
-
-
-            //return _center;
-
-
-            //var minPrice = points3D.Select(p => p.Z).Min();
-            //var t1 = points3D.Find(x => x.Z == minPrice).X;
-            //var t2 = points3D.Find(x => x.Z == minPrice).Y;
-            results = new CalculationResults { Price = _center.Z, T1 = _center.X, T2 = _center.Y, Points3D = new ObservableCollection<Point3D>(points3D) };
+            CalculateGraphPoints(out points3D);
+            results = new CalculationResults { Price = Math.Round(_center.Z, 2), T1 = Math.Round(_center.X, 2), T2 = Math.Round(_center.Y, 2), Points3D = new ObservableCollection<Point3D>(points3D) };
         }
 
         // Формирование исходного комплекса
@@ -69,12 +75,12 @@ namespace OptimizationMethods.Methods
         {
             var allPoints = GetRandomPoints();
 
-            while (allPoints.All(p => !_variant.Conditions(p.X, p.Y)))
+            while (allPoints.All(p => !_variant.SecondCondition(p.X, p.Y)))
             {
                 allPoints = GetRandomPoints();
             }
 
-            var fixedPoints = allPoints.Where(p => _variant.Conditions(p.X, p.Y)).ToList();
+            var fixedPoints = allPoints.Where(p => _variant.SecondCondition(p.X, p.Y)).ToList();
             var unfixedPoints = allPoints.Where(p => !fixedPoints.Contains(p)).ToList();
 
             while (unfixedPoints.Count != 0)
@@ -107,7 +113,7 @@ namespace OptimizationMethods.Methods
             var rnd = new Random();
             var complex = new List<Point3D>();
 
-            for (var i = 0; i < vertexCount; i++)
+            for (var i = 0; i < _vertexCount; i++)
             {
                 var t1 = _t1min + rnd.NextDouble() * (_t1max - _t1min);
                 var t2 = _t2min + rnd.NextDouble() * (_t2max - _t2min);
@@ -120,8 +126,8 @@ namespace OptimizationMethods.Methods
         // Определение координат центра Комплекса с отброшенной «наихудшей» вершиной
         private static Point3D GetGravityCenterWithoutWorstVertex()
         {
-            var t1 = 1.0 / (vertexCount - 1) * (_complex.Sum(p => p.X) - _worstVertex.X);
-            var t2 = 1.0 / (vertexCount - 1) * (_complex.Sum(p => p.X) - _worstVertex.X);
+            var t1 = 1.0 / (_vertexCount - 1) * (_complex.Sum(p => p.X) - _worstVertex.X);
+            var t2 = 1.0 / (_vertexCount - 1) * (_complex.Sum(p => p.Y) - _worstVertex.Y);
             var center = new Point3D(t1, t2, _variant.Function(t1, t2));
             return center;
         }
@@ -169,25 +175,21 @@ namespace OptimizationMethods.Methods
             vertex1.Z = _variant.Function(vertex1.X, vertex1.Y);
         }
 
-
-        private static OptimizatonMethods.Models.Point SearchMinOnGrid(Variant variant, out List<Point3D> points3D, out List<double> values)
+        private static void CalculateGraphPoints(out List<Point3D> points3D)
         {
             points3D = new List<Point3D>();
             for (var t1 = _t1min; t1 <= _t1max; t1 += _step)
             {
                 for (var t2 = _t2min; t2 <= _t2max; t2 += _step)
                 {
-                    if (!variant.Conditions(t1, t2))
+                    if (!_variant.Conditions(t1, t2))
                     {
                         continue;
                     }
-                    var value = variant.Function(t1, t2);
+                    var value = _variant.Function(t1, t2);
                     points3D.Add(new Point3D(Math.Round(t1, 2), Math.Round(t2, 2), Math.Round(value, 2)));
                 }
             }
-            var valuesListTemp = points3D.Select(item => item.Z).ToList();
-            values = valuesListTemp;
-            return new OptimizatonMethods.Models.Point(points3D.Find(x => x.Z == valuesListTemp.Min()).X, points3D.Find(x => x.Z == valuesListTemp.Min()).Y);
         }
     }
 }

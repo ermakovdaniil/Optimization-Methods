@@ -12,17 +12,17 @@ namespace OptimizationMethods.Methods
         private static readonly double _k = 10;
         private static readonly double _r = 2;
         private static double _step;
-        private static double t1min;
-        private static double t1max;
-        private static double t2min;
-        private static double t2max;
+        private static double _t1min;
+        private static double _t1max;
+        private static double _t2min;
+        private static double _t2max;
 
         public static void Calculate(Variant variant, out CalculationResults results)
         {
-            t1min = variant.T1min;
-            t2min = variant.T2min;
-            t1max = variant.T1max;
-            t2max = variant.T2max;
+            _t1min = variant.T1min;
+            _t2min = variant.T2min;
+            _t1max = variant.T1max;
+            _t2max = variant.T2max;
 
             var funcMin = double.MaxValue;
             _step = Math.Pow(_k, _r) * variant.Precision;
@@ -31,20 +31,20 @@ namespace OptimizationMethods.Methods
             List<double> values;
             OptimizatonMethods.Models.Point newMin;
             newMin = SearchMinOnGrid(variant, out p3D, out values);
-            t1min = newMin.X - _step;
-            t2min = newMin.Y - _step;
-            t1max = newMin.X + _step;
-            t2max = newMin.Y + _step;
+            _t1min = newMin.X - _step;
+            _t2min = newMin.Y - _step;
+            _t1max = newMin.X + _step;
+            _t2max = newMin.Y + _step;
             _step /= _k;
             points3D.AddRange(p3D);
 
             while (funcMin > values.Min())
             {
                 newMin = SearchMinOnGrid(variant, out p3D, out values);
-                t1min = newMin.X - _step;
-                t2min = newMin.Y - _step;
-                t1max = newMin.X + _step;
-                t2max = newMin.Y + _step;
+                _t1min = newMin.X - _step;
+                _t2min = newMin.Y - _step;
+                _t1max = newMin.X + _step;
+                _t2max = newMin.Y + _step;
                 _step /= _k;
                 funcMin = values.Min();
                 points3D.AddRange(p3D);
@@ -58,10 +58,9 @@ namespace OptimizationMethods.Methods
         private static OptimizatonMethods.Models.Point SearchMinOnGrid(Variant variant, out List<Point3D> points3D, out List<double> values)
         {
             points3D = new List<Point3D>();
-            //var methods = new MathModel(variant);
-            for (var t1 = t1min; t1 <= t1max; t1 += _step)
+            for (var t1 = _t1min; t1 <= _t1max; t1 += _step)
             {
-                for (var t2 = t2min; t2 <= t2max; t2 += _step)
+                for (var t2 = _t2min; t2 <= _t2max; t2 += _step)
                 {
                     if (!variant.Conditions(t1, t2))
                     {
