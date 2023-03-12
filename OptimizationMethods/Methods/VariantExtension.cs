@@ -14,5 +14,15 @@ namespace OptimizationMethods.Methods
         {
             return t1 >= variant.T1min && t1 <= variant.T1max && t2 >= variant.T2min && t2 <= variant.T2max && t1 + 0.5 * t2 <= variant.TempCondition;
         }
+
+        public static bool FirstCondition(this Variant variant, double t1, double t2)
+        {
+            return t1 >= variant.T1min && t1 <= variant.T1max && t2 >= variant.T2min && t2 <= variant.T2max;
+        }
+
+        public static bool SecondCondition(this Variant variant, double t1, double t2)
+        {
+            return t1 + 0.5 * t2 <= variant.TempCondition;
+        }
     }
 }

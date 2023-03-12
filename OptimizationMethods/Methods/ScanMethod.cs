@@ -9,8 +9,6 @@ namespace OptimizationMethods.Methods
 {
     public static class ScanMethod
     {
-        public static int CalculationCount { get; private set; }
-
         private static readonly double _k = 10;
         private static readonly double _r = 2;
         private static double _step;
@@ -70,14 +68,7 @@ namespace OptimizationMethods.Methods
                         continue;
                     }
 
-                    CalculationCount++;
                     var value = variant.Function(t1, t2);
-
-                    if (value < 0)
-                    {
-                        //MessageBox.Show($"t1 {t1} t2 {t2} Z {value}");
-                    }
-
                     points3D.Add(new Point3D(Math.Round(t1, 2), Math.Round(t2, 2), Math.Round(value, 2)));
                 }
             }
