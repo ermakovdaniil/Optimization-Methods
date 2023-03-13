@@ -35,10 +35,12 @@ namespace OptimizationMethods.Methods
             _t2max = _variant.T2max;
             _complex = GetInitialComplex();
 
+            foreach (var p in _complex)
+            {
+                points3D.Add(p);
+            }
+
             //var points3D = new List<Point3D>();
-            points3D.Add(_complex[0]);
-            points3D.Add(_complex[1]);
-            points3D.Add(_complex[2]);
             do
             {
                 _worstVertex = _complex.MaxBy(p => p.Z);
