@@ -23,7 +23,7 @@ namespace OptimizationMethods.Methods
         private static Variant _variant;
         private static readonly double _k = 10;
         private static readonly double _r = 2;
-
+        private static List<Point3D> points3D = new List<Point3D>();
         public static void Calculate(Variant variant, out CalculationResults results)
         {
             _variant = variant;
@@ -35,12 +35,18 @@ namespace OptimizationMethods.Methods
             _t2max = _variant.T2max;
             _complex = GetInitialComplex();
 
-            var points3D = new List<Point3D>();
+            //var points3D = new List<Point3D>();
+            points3D.Add(_complex[0]);
+            points3D.Add(_complex[1]);
+            points3D.Add(_complex[2]);
             do
             {
                 _worstVertex = _complex.MaxBy(p => p.Z);
                 _bestVertex = _complex.MinBy(p => p.Z);
                 _center = GetGravityCenterWithoutWorstVertex();
+
+                points3D.Add(_center);
+
                 var b = GetB();
                 if (b < _eps)
                 {
@@ -48,10 +54,11 @@ namespace OptimizationMethods.Methods
                 }
 
                 var newVertex = GetNewVertexInsteadWorst();
-
+                points3D.Add(newVertex);
                 while (!_variant.SecondCondition(newVertex.X, newVertex.Y))
                 {
                     HalfShiftVertex1ToVertex2(newVertex, _center);
+                    points3D.Add(newVertex);
                     //if (newVertex == _center)
                     //{
                     //    continue;
@@ -61,12 +68,20 @@ namespace OptimizationMethods.Methods
                 while (newVertex.Z > _worstVertex.Z)
                 {
                     HalfShiftVertex1ToVertex2(newVertex, _bestVertex);
+                    points3D.Add(newVertex);
                 }
 
                 _complex.Remove(_worstVertex);
                 _complex.Add(newVertex);
             } while (GetB() >= _eps);
-            CalculateGraphPoints(out points3D);
+
+            foreach (var p in points3D)
+            {
+                p.X = Math.Round(p.X, 2);
+                p.Y = Math.Round(p.Y, 2);
+                p.Z = Math.Round(p.Z, 2);
+            }
+            //CalculateGraphPoints(out points3D);
             results = new CalculationResults { Price = Math.Round(_center.Z, 2), T1 = Math.Round(_center.X, 2), T2 = Math.Round(_center.Y, 2), Points3D = new ObservableCollection<Point3D>(points3D) };
         }
 
@@ -90,6 +105,7 @@ namespace OptimizationMethods.Methods
                 while (!_variant.Conditions(unfixedPoint.X, unfixedPoint.Y))
                 {
                     ShiftVertex(unfixedPoint, fixedPoints);
+                    points3D.Add(unfixedPoint);
                 }
 
                 unfixedPoints.Remove(unfixedPoint);
