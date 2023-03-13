@@ -81,8 +81,10 @@ namespace OptimizationMethods.Methods
                 p.Y = Math.Round(p.Y, 2);
                 p.Z = Math.Round(p.Z, 2);
             }
+            var temp = new List<Point3D>();
+            temp = points3D.Distinct().ToList();
             //CalculateGraphPoints(out points3D);
-            results = new CalculationResults { Price = Math.Round(_center.Z, 2), T1 = Math.Round(_center.X, 2), T2 = Math.Round(_center.Y, 2), Points3D = new ObservableCollection<Point3D>(points3D) };
+            results = new CalculationResults { Price = Math.Round(_center.Z, 2), T1 = Math.Round(_center.X, 2), T2 = Math.Round(_center.Y, 2), Points3D = new ObservableCollection<Point3D>(temp) };
         }
 
         // Формирование исходного комплекса
