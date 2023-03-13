@@ -178,9 +178,9 @@ namespace OptimizationMethods.Methods
         private static void CalculateGraphPoints(out List<Point3D> points3D)
         {
             points3D = new List<Point3D>();
-            for (var t1 = _t1min; t1 <= _t1max; t1 += _step)
+            for (var t1 = _t1min; t1 <= _t1max; t1 += _eps)
             {
-                for (var t2 = _t2min; t2 <= _t2max; t2 += _step)
+                for (var t2 = _t2min; t2 <= _t2max; t2 += _eps)
                 {
                     var value = _variant.Function(t1, t2);
                     points3D.Add(new Point3D(Math.Round(t1, 2), Math.Round(t2, 2), Math.Round(value, 2)));
