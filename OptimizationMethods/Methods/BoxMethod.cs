@@ -87,7 +87,7 @@ namespace OptimizationMethods.Methods
             {
                 var unfixedPoint = unfixedPoints[0];
 
-                while (_variant.Conditions(unfixedPoint.X, unfixedPoint.Y))
+                while (!_variant.Conditions(unfixedPoint.X, unfixedPoint.Y))
                 {
                     ShiftVertex(unfixedPoint, fixedPoints);
                 }
@@ -182,10 +182,6 @@ namespace OptimizationMethods.Methods
             {
                 for (var t2 = _t2min; t2 <= _t2max; t2 += _step)
                 {
-                    if (!_variant.Conditions(t1, t2))
-                    {
-                        continue;
-                    }
                     var value = _variant.Function(t1, t2);
                     points3D.Add(new Point3D(Math.Round(t1, 2), Math.Round(t2, 2), Math.Round(value, 2)));
                 }
